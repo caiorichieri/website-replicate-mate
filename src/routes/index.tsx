@@ -95,7 +95,11 @@ function HomePage() {
       <section className="container mx-auto px-4 py-20 md:px-6 md:py-28">
         <div className="grid items-center gap-12 lg:grid-cols-2">
           <div className="relative">
-            <img src={introImage} alt="Allestimento prosecco Alla Nazionale" className="rounded-2xl shadow-2xl" />
+            <img
+              src={introImage}
+              alt="Allestimento prosecco Alla Nazionale"
+              className="h-[600px] w-full rounded-2xl object-cover shadow-2xl md:h-[700px] lg:h-[750px]"
+            />
             <div className="absolute -bottom-5 -right-5 hidden rounded-xl bg-primary px-5 py-4 text-primary-foreground shadow-xl md:block">
               <p className="font-display text-3xl font-bold leading-none">110+</p>
               <p className="mt-1 text-xs font-semibold uppercase tracking-wider">anni di storia</p>
