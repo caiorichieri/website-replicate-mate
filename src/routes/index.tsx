@@ -19,8 +19,7 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "Alla Nazionale — Eventi & Catering dal 1912" },
       {
         property: "og:description",
-        content:
-          "Trasformiamo i tuoi momenti in ricordi indimenticabili. Bar storico, eventi privati e catering.",
+        content: "Trasformiamo i tuoi momenti in ricordi indimenticabili. Bar storico, eventi privati e catering.",
       },
       { property: "og:image", content: "/og-home.jpg" },
       { property: "og:url", content: "https://allanazionale.it/" },
@@ -96,28 +95,18 @@ function HomePage() {
       <section className="container mx-auto px-4 py-20 md:px-6 md:py-28">
         <div className="grid items-center gap-12 lg:grid-cols-2">
           <div className="relative">
-            <img
-              src={introImage}
-              alt="Allestimento prosecco Alla Nazionale"
-              className="rounded-2xl shadow-2xl"
-            />
+            <img src={introImage} alt="Allestimento prosecco Alla Nazionale" className="rounded-2xl shadow-2xl" />
             <div className="absolute -bottom-5 -right-5 hidden rounded-xl bg-primary px-5 py-4 text-primary-foreground shadow-xl md:block">
               <p className="font-display text-3xl font-bold leading-none">110+</p>
-              <p className="mt-1 text-xs font-semibold uppercase tracking-wider">
-                anni di storia
-              </p>
+              <p className="mt-1 text-xs font-semibold uppercase tracking-wider">anni di storia</p>
             </div>
           </div>
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gold">
-              {t("home.introEyebrow")}
-            </p>
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gold">{t("home.introEyebrow")}</p>
             <h2 className="mt-4 font-display text-3xl font-bold text-foreground sm:text-4xl md:text-5xl">
               {t("home.introTitle")}
             </h2>
-            <p className="mt-5 text-base leading-relaxed text-muted-foreground">
-              {t("home.introText")}
-            </p>
+            <p className="mt-5 text-base leading-relaxed text-muted-foreground">{t("home.introText")}</p>
             <Link
               to="/chi-siamo"
               className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-gold"
@@ -130,17 +119,13 @@ function HomePage() {
 
       {/* EVENTI */}
       <section className="bg-card py-20 md:py-28">
-        <div className="container mx-auto px-4 md:px-6">
+        <div className="container mx-auto px-8 md:px-12">
           <div className="mx-auto max-w-2xl text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gold">
-              {t("home.eventsEyebrow")}
-            </p>
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gold">{t("home.eventsEyebrow")}</p>
             <h2 className="mt-4 font-display text-3xl font-bold text-foreground sm:text-4xl md:text-5xl">
               {t("home.eventsTitle")}
             </h2>
-            <p className="mt-4 text-base text-muted-foreground">
-              {t("home.eventsSubtitle")}
-            </p>
+            <p className="mt-4 text-base text-muted-foreground">{t("home.eventsSubtitle")}</p>
           </div>
 
           <div className="mt-14 grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
@@ -174,22 +159,14 @@ function HomePage() {
       <section className="container mx-auto px-4 py-20 md:px-6 md:py-28">
         <div className="grid items-center gap-12 lg:grid-cols-2">
           <div className="lg:order-2">
-            <img
-              src={spacesImage}
-              alt="Area esterna coperta Alla Nazionale"
-              className="rounded-2xl shadow-2xl"
-            />
+            <img src={spacesImage} alt="Area esterna coperta Alla Nazionale" className="rounded-2xl shadow-2xl" />
           </div>
           <div className="lg:order-1">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gold">
-              {t("home.spacesEyebrow")}
-            </p>
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gold">{t("home.spacesEyebrow")}</p>
             <h2 className="mt-4 font-display text-3xl font-bold text-foreground sm:text-4xl md:text-5xl">
               {t("home.spacesTitle")}
             </h2>
-            <p className="mt-5 text-base leading-relaxed text-muted-foreground">
-              {t("home.spacesText")}
-            </p>
+            <p className="mt-5 text-base leading-relaxed text-muted-foreground">{t("home.spacesText")}</p>
             <Link
               to="/spazi"
               className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-gold"
@@ -203,15 +180,11 @@ function HomePage() {
       {/* CTA FINALE */}
       <section className="container mx-auto px-4 pb-24 md:px-6">
         <div className="overflow-hidden rounded-3xl border border-gold/30 bg-gradient-to-br from-card via-card to-background px-6 py-14 text-center md:px-12 md:py-20">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gold">
-            {t("common.bookEvent")}
-          </p>
+          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gold">{t("common.bookEvent")}</p>
           <h2 className="mx-auto mt-4 max-w-3xl font-display text-3xl font-bold text-foreground sm:text-4xl md:text-5xl">
             {t("home.ctaTitle")}
           </h2>
-          <p className="mx-auto mt-5 max-w-xl text-muted-foreground">
-            {t("home.ctaText")}
-          </p>
+          <p className="mx-auto mt-5 max-w-xl text-muted-foreground">{t("home.ctaText")}</p>
           <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <a
               href={whatsappUrl()}
