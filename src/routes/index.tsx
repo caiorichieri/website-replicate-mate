@@ -163,24 +163,31 @@ function HomePage() {
         </div>
       </section>
 
-      {/* SPAZI */}
-      <section className="container mx-auto px-4 py-20 md:px-6 md:py-28">
-        <div className="grid items-center gap-12 lg:grid-cols-2">
-          <div className="lg:order-2">
-            <img src={spacesImage} alt="Area esterna coperta Alla Nazionale" className="h-[480px] w-full rounded-2xl object-cover shadow-2xl md:h-[576px] lg:h-[640px]" />
-          </div>
-          <div className="lg:order-1">
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gold">{t("home.spacesEyebrow")}</p>
-            <h2 className="mt-4 font-display text-3xl font-bold text-foreground sm:text-4xl md:text-5xl">
-              {t("home.spacesTitle")}
-            </h2>
-            <p className="mt-5 text-base leading-relaxed text-muted-foreground">{t("home.spacesText")}</p>
-            <Link
-              to="/spazi"
-              className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-gold"
-            >
-              {t("common.discover")} <ArrowRight className="h-4 w-4" />
-            </Link>
+      {/* SPAZI — full-bleed cinematográfico, texto à direita */}
+      <section className="relative w-full">
+        <div className="relative h-[80vh] min-h-[600px] w-full overflow-hidden md:h-[90vh]">
+          <img
+            src={spacesImage}
+            alt="Area esterna coperta Alla Nazionale"
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-l from-background via-background/80 to-transparent md:via-background/60" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent" />
+
+          <div className="container relative mx-auto flex h-full items-center justify-end px-4 md:px-6">
+            <div className="max-w-xl animate-fade-up text-left md:text-right">
+              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gold">{t("home.spacesEyebrow")}</p>
+              <h2 className="mt-4 font-display text-4xl font-bold leading-tight text-foreground sm:text-5xl md:text-6xl">
+                {t("home.spacesTitle")}
+              </h2>
+              <p className="mt-6 text-base leading-relaxed text-foreground/85 md:text-lg">{t("home.spacesText")}</p>
+              <Link
+                to="/spazi"
+                className="mt-8 inline-flex items-center gap-2 rounded-full border border-gold/50 bg-background/40 px-6 py-3 text-sm font-semibold text-gold backdrop-blur-sm transition-all hover:bg-gold hover:text-gold-foreground"
+              >
+                {t("common.discover")} <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
           </div>
         </div>
       </section>
