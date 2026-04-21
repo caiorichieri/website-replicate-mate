@@ -163,7 +163,7 @@ function HomePage() {
       <section className="container mx-auto px-4 py-20 md:px-6 md:py-28">
         <div className="grid items-center gap-12 lg:grid-cols-2">
           <div className="lg:order-2">
-            <img src={spacesImage} alt="Area esterna coperta Alla Nazionale" className="rounded-2xl shadow-2xl" />
+            <img src={spacesImage} alt="Area esterna coperta Alla Nazionale" className="h-[480px] w-full rounded-2xl object-cover shadow-2xl md:h-[576px] lg:h-[640px]" />
           </div>
           <div className="lg:order-1">
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gold">{t("home.spacesEyebrow")}</p>
