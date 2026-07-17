@@ -1,9 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Calendar, Cake, Baby, GraduationCap, Heart, Building2, Utensils, Music, ArrowRight } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
 import { useI18n } from "@/lib/i18n";
 import { whatsappUrl } from "@/lib/contact";
+import { EVENT_CATEGORIES } from "@/content/site";
 
 export const Route = createFileRoute("/eventi")({
   head: () => ({
@@ -20,25 +20,13 @@ export const Route = createFileRoute("/eventi")({
         content:
           "Organizziamo eventi privati di ogni tipo: compleanni, baby shower, lauree, anniversari, feste aziendali e catering.",
       },
-      { property: "og:image", content: "/og-events.jpg" },
     ],
   }),
   component: EventsPage,
 });
 
-const EVENTS: { key: string; Icon: LucideIcon }[] = [
-  { key: "compleanni", Icon: Calendar },
-  { key: "primo", Icon: Cake },
-  { key: "babyshower", Icon: Baby },
-  { key: "lauree", Icon: GraduationCap },
-  { key: "anniversari", Icon: Heart },
-  { key: "aziendali", Icon: Building2 },
-  { key: "catering", Icon: Utensils },
-  { key: "djset", Icon: Music },
-];
-
 function EventsPage() {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
 
   return (
     <SiteLayout>
@@ -54,19 +42,19 @@ function EventsPage() {
         </div>
 
         <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {EVENTS.map(({ key, Icon }) => (
+          {EVENT_CATEGORIES.map(({ id, Icon, title, desc }) => (
             <article
-              key={key}
+              key={id}
               className="group flex flex-col rounded-2xl border border-border/60 bg-card p-7 transition-all hover:-translate-y-1 hover:border-primary/60 hover:shadow-xl hover:shadow-primary/10"
             >
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
                 <Icon className="h-5 w-5" />
               </div>
               <h2 className="mt-5 font-display text-xl font-semibold text-foreground">
-                {t(`events.${key}.title`)}
+                {title[locale]}
               </h2>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                {t(`events.${key}.desc`)}
+                {desc[locale]}
               </p>
             </article>
           ))}

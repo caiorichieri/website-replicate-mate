@@ -1,9 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
 import { useI18n } from "@/lib/i18n";
-import internaImage from "@/assets/gallery-06-sala-interna.jpg";
-import esternaImage from "@/assets/gallery-07-area-esterna.jpg";
-import giardinoImage from "@/assets/gallery-08-giardino.jpg";
+import { SPACES } from "@/content/site";
+import { photos } from "@/content/photos";
 
 export const Route = createFileRoute("/spazi")({
   head: () => ({
@@ -12,27 +11,21 @@ export const Route = createFileRoute("/spazi")({
       {
         name: "description",
         content:
-          "Sala interna elegante, area esterna coperta e ampio giardino. Ambienti versatili per eventi privati di ogni tipo.",
+          "Sala interna elegante, pergolato in legno, terrazza panoramica e ampio giardino. Ambienti versatili per eventi privati di ogni tipo.",
       },
       { property: "og:title", content: "I nostri spazi — Alla Nazionale" },
       {
         property: "og:description",
-        content: "Sala interna, area esterna coperta e giardino per i tuoi eventi.",
+        content:
+          "Sala interna, pergolato coperto, terrazza panoramica e giardino per i tuoi eventi.",
       },
-      { property: "og:image", content: "/og-spaces.jpg" },
     ],
   }),
   component: SpacesPage,
 });
 
-const SPACES = [
-  { key: "interna", img: internaImage },
-  { key: "esterna", img: esternaImage },
-  { key: "giardino", img: giardinoImage },
-] as const;
-
 function SpacesPage() {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
 
   return (
     <SiteLayout>
@@ -48,27 +41,27 @@ function SpacesPage() {
         </div>
 
         <div className="mt-16 space-y-16 md:space-y-24">
-          {SPACES.map(({ key, img }, idx) => (
+          {SPACES.map((space, idx) => (
             <article
-              key={key}
+              key={space.id}
               className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14"
             >
               <div className={idx % 2 === 1 ? "lg:order-2" : ""}>
                 <img
-                  src={img}
-                  alt={t(`spaces.${key}.title`)}
+                  src={photos[space.coverPhotoId]}
+                  alt={space.title[locale]}
                   className="aspect-[4/3] w-full rounded-2xl object-cover shadow-2xl"
                 />
               </div>
               <div className={idx % 2 === 1 ? "lg:order-1" : ""}>
                 <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gold">
-                  0{idx + 1}
+                  {String(idx + 1).padStart(2, "0")}
                 </p>
                 <h2 className="mt-3 font-display text-3xl font-bold text-foreground sm:text-4xl">
-                  {t(`spaces.${key}.title`)}
+                  {space.title[locale]}
                 </h2>
                 <p className="mt-5 text-base leading-relaxed text-muted-foreground">
-                  {t(`spaces.${key}.desc`)}
+                  {space.desc[locale]}
                 </p>
               </div>
             </article>
