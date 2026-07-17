@@ -14,7 +14,7 @@ const spacesImage = photos[HOME_PHOTOS.spaces];
 const EVENT_HIGHLIGHTS = EVENT_CATEGORIES.slice(0, 8);
 
 function HomePage() {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
 
   return (
     <SiteLayout>
