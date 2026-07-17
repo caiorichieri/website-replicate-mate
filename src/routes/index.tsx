@@ -100,16 +100,16 @@ function HomePage() {
           </div>
 
           <div className="mt-14 grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
-            {EVENT_HIGHLIGHTS.map(({ key, Icon }) => (
+            {EVENT_HIGHLIGHTS.map(({ id, Icon, title }) => (
               <div
-                key={key}
+                key={id}
                 className="group rounded-2xl border border-border bg-background p-5 text-center transition-all hover:-translate-y-1 hover:border-primary hover:shadow-lg hover:shadow-primary/10 md:p-7"
               >
                 <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary/15 text-gold transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
                   <Icon className="h-5 w-5" />
                 </div>
                 <h3 className="mt-4 font-display text-base font-semibold text-foreground md:text-lg">
-                  {t(`events.${key}.title`)}
+                  {title[locale]}
                 </h3>
               </div>
             ))}
