@@ -25,22 +25,22 @@ const translations: Translations = {
     "common.bookEvent": "Prenota il tuo evento",
 
     // Home
-    "home.heroTitle": "Trasformiamo i tuoi momenti in ricordi indimenticabili",
-    "home.heroSubtitle": "Bar storico dal 1912. Organizziamo eventi privati, feste, catering e cerimonie con eleganza e tradizione.",
-    "home.heroCta": "Richiedi un preventivo gratuito",
-    "home.heroSecondary": "Scopri i nostri spazi",
+    "home.heroTitle": "La nostra location per celebrare e brindare",
+    "home.heroSubtitle": "La nostra location per celebrare, brindare i tuoi traguardi e creare ricordi indimenticabili. Dai gender reveal, ai 18esimi, alla laurea e alle feste di pensionamento.",
+    "home.heroCta": "Organizza il tuo evento",
+    "home.heroSecondary": "Scopri di più",
 
     "home.introEyebrow": "La nostra storia",
-    "home.introTitle": "Oltre un secolo di accoglienza",
-    "home.introText": "Dal 1912 Alla Nazionale è il punto di riferimento per chi cerca un luogo autentico dove celebrare i momenti più importanti della vita. Tradizione, qualità e ospitalità in un'unica location.",
+    "home.introTitle": "Una storia che va oltre il secolo",
+    "home.introText": "Il bar ha una storia che va oltre il secolo, tramandata di generazione in generazione fino all'attuale gestione della Sig.ra Alberta Cinelli insieme alle sue due figlie Alessandra e Angelica. Il locale vanta una licenza storica risalente al 1912 per il servizio di bar (colazione, brioche e aperitivi) e dal 2022 ha deciso di specializzarsi, ristrutturando e ampliando la vecchia tappezzeria di famiglia in una nuova sala eventi. L'idea che la famiglia vuole portare avanti attraverso l'affitto della nuova location è quella di far vivere al festeggiato la sua occasione intensamente, senza pensieri. All'organizzazione, al buffet, alla somministrazione e all'allestimento ci pensiamo noi!",
 
     "home.eventsEyebrow": "Cosa organizziamo",
     "home.eventsTitle": "Eventi su misura per te",
     "home.eventsSubtitle": "Ogni occasione merita di essere celebrata con cura. Dai compleanni alle feste aziendali, ci occupiamo di tutto.",
 
-    "home.spacesEyebrow": "I nostri spazi",
-    "home.spacesTitle": "Ambienti raffinati per ogni occasione",
-    "home.spacesText": "Sala interna elegante, area esterna coperta e ampio giardino. Spazi versatili che si adattano a feste intime o grandi celebrazioni.",
+    "home.spacesEyebrow": "Personalizzazione",
+    "home.spacesTitle": "Ogni evento nei minimi dettagli",
+    "home.spacesText": "Personalizziamo ogni evento nei minimi dettagli: dai buffet gourmet, ai paninetti per i bambini, dagli eventi formali a quelli informali.",
 
     "home.ctaTitle": "Pronto a organizzare il tuo evento?",
     "home.ctaText": "Contattaci subito per un preventivo personalizzato. Ti risponderemo entro poche ore.",
@@ -138,22 +138,22 @@ const translations: Translations = {
     "common.bookEvent": "Book your event",
 
     // Home
-    "home.heroTitle": "Turning your moments into unforgettable memories",
-    "home.heroSubtitle": "Historic bar since 1912. We host private events, parties, catering and celebrations with elegance and tradition.",
-    "home.heroCta": "Request a free quote",
-    "home.heroSecondary": "Discover our spaces",
+    "home.heroTitle": "Your place to celebrate and toast",
+    "home.heroSubtitle": "Our venue to celebrate, toast your milestones and create unforgettable memories. From gender reveals to 18th birthdays, graduations and retirement parties.",
+    "home.heroCta": "Plan your event",
+    "home.heroSecondary": "Discover more",
 
     "home.introEyebrow": "Our story",
-    "home.introTitle": "Over a century of hospitality",
-    "home.introText": "Since 1912 Alla Nazionale has been the place to celebrate life's most important moments. Tradition, quality and warm hospitality in one unique venue.",
+    "home.introTitle": "A history that spans more than a century",
+    "home.introText": "Our bar has a history spanning more than a century, handed down from generation to generation, up to today's management by Mrs. Alberta Cinelli and her two daughters Alessandra and Angelica. The venue holds a historic license dating back to 1912 for bar service (breakfast, pastries and aperitifs), and since 2022 has chosen to specialise by renovating and expanding the family's old upholstery workshop into a brand-new event hall. The idea the family carries forward with this new location is to let the guest of honour enjoy their occasion fully, without a single worry. Organisation, buffet, service and set-up — we take care of it all.",
 
     "home.eventsEyebrow": "What we host",
     "home.eventsTitle": "Tailor-made events for you",
     "home.eventsSubtitle": "Every occasion deserves to be celebrated with care. From birthdays to corporate parties, we take care of everything.",
 
-    "home.spacesEyebrow": "Our spaces",
-    "home.spacesTitle": "Refined settings for any occasion",
-    "home.spacesText": "Elegant indoor hall, covered outdoor area and a large garden. Versatile spaces that adapt to intimate parties or grand celebrations.",
+    "home.spacesEyebrow": "Personalisation",
+    "home.spacesTitle": "Every event down to the last detail",
+    "home.spacesText": "We personalise every event down to the last detail: from gourmet buffets to little sandwiches for the kids, from formal events to informal ones.",
 
     "home.ctaTitle": "Ready to plan your event?",
     "home.ctaText": "Get in touch for a personalised quote. We'll reply within hours.",
