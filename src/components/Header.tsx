@@ -21,23 +21,11 @@ export function Header() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-border/40 bg-background/80 backdrop-blur-md">
-      <div className="container mx-auto flex h-16 items-center justify-between px-4 md:h-20 md:px-6">
-        {/* Logo / Brand */}
-        <Link to="/" className="group flex items-center gap-2" aria-label="Alla Nazionale — Home">
-          <div className="flex flex-col leading-none">
-            <span className="font-display text-lg font-bold tracking-tight text-primary md:text-xl">
-              Alla Nazionale
-            </span>
-            <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-gold md:text-xs">
-              Dal 1912
-            </span>
-          </div>
-        </Link>
-
-        {/* Desktop nav */}
-        <nav className="hidden items-center gap-1 lg:flex" aria-label="Main">
-          {NAV_ITEMS.map((item) => {
+    <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/85 backdrop-blur-md">
+      <div className="container relative mx-auto flex h-16 items-center px-4 md:h-20 md:px-6">
+        {/* Left slot (desktop nav) */}
+        <nav className="hidden flex-1 items-center gap-1 lg:flex" aria-label="Main">
+          {NAV_ITEMS.slice(0, 3).map((item) => {
             const active = location.pathname === item.to;
             return (
               <Link
@@ -45,9 +33,7 @@ export function Header() {
                 to={item.to}
                 className={cn(
                   "rounded-md px-3 py-2 text-sm font-medium transition-colors",
-                  active
-                    ? "text-primary"
-                    : "text-foreground/80 hover:text-primary",
+                  active ? "text-primary" : "text-foreground/80 hover:text-primary",
                 )}
               >
                 {t(item.key)}
@@ -56,32 +42,71 @@ export function Header() {
           })}
         </nav>
 
-        {/* Right side */}
-        <div className="flex items-center gap-3">
-          <LangSwitcher className="hidden sm:flex" />
+        {/* Center: Logo / Brand */}
+        <Link
+          to="/"
+          className="group absolute left-1/2 -translate-x-1/2 flex items-center gap-2 lg:static lg:translate-x-0"
+          aria-label="Alla Nazionale — Home"
+        >
+          <div className="flex flex-col items-center leading-none">
+            <span className="font-display text-lg font-bold tracking-tight text-foreground md:text-2xl">
+              Alla Nazionale
+            </span>
+            <span className="mt-0.5 text-[10px] font-medium uppercase tracking-[0.25em] text-gold md:text-xs">
+              Dal 1912
+            </span>
+          </div>
+        </Link>
+
+        {/* Right slot (desktop nav + CTA) */}
+        <nav className="hidden flex-1 items-center justify-end gap-1 lg:flex" aria-label="Main secondary">
+          {NAV_ITEMS.slice(3).map((item) => {
+            const active = location.pathname === item.to;
+            return (
+              <Link
+                key={item.to}
+                to={item.to}
+                className={cn(
+                  "rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                  active ? "text-primary" : "text-foreground/80 hover:text-primary",
+                )}
+              >
+                {t(item.key)}
+              </Link>
+            );
+          })}
+          <LangSwitcher className="ml-2" />
           <a
             href={whatsappUrl()}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground transition-transform hover:scale-105 lg:inline-flex"
+            className="ml-2 rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground transition-transform hover:scale-105"
           >
             {t("nav.cta")}
           </a>
+        </nav>
+
+        {/* Mobile: burger on the right */}
+        <div className="ml-auto flex items-center gap-2 lg:hidden">
+          <LangSwitcher className="hidden sm:flex" />
           <button
             type="button"
-            className="rounded-md p-2 text-foreground lg:hidden"
-            onClick={() => setOpen((v) => !v)}
+            className="relative z-10 rounded-md p-2 text-foreground hover:bg-secondary"
+            onClick={(e) => {
+              e.stopPropagation();
+              setOpen((v) => !v);
+            }}
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
           >
-            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
         </div>
       </div>
 
       {/* Mobile menu */}
       {open && (
-        <div className="border-t border-border/40 bg-background lg:hidden">
+        <div className="absolute inset-x-0 top-full z-50 border-t border-border/60 bg-background shadow-lg lg:hidden">
           <nav className="container mx-auto flex flex-col gap-1 px-4 py-4" aria-label="Mobile">
             {NAV_ITEMS.map((item) => {
               const active = location.pathname === item.to;
@@ -101,7 +126,7 @@ export function Header() {
                 </Link>
               );
             })}
-            <div className="mt-2 flex items-center justify-between border-t border-border/40 pt-3">
+            <div className="mt-2 flex items-center justify-between border-t border-border/60 pt-3">
               <LangSwitcher />
               <a
                 href={whatsappUrl()}
