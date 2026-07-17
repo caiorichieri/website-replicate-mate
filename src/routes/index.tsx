@@ -13,6 +13,11 @@ const spacesImage = photos[HOME_PHOTOS.spaces];
 // Primeiros 8 destaques da home a partir das categorias
 const EVENT_HIGHLIGHTS = EVENT_CATEGORIES.slice(0, 8);
 
+export const Route = createFileRoute("/")({
+  component: HomePage,
+});
+
+
 function HomePage() {
   const { t, locale } = useI18n();
 
