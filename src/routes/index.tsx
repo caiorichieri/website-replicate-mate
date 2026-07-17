@@ -1,49 +1,17 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Calendar, Cake, Baby, GraduationCap, Heart, Building2, Utensils, Music } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
 import { useI18n } from "@/lib/i18n";
 import { whatsappUrl } from "@/lib/contact";
-import heroImage from "@/assets/gallery-05-buffet-tavole.jpg";
-import introImage from "@/assets/gallery-02-pneu-prosecco.jpg";
-import spacesImage from "@/assets/gallery-07-area-esterna.jpg";
+import { EVENT_CATEGORIES, HOME_PHOTOS } from "@/content/site";
+import { photos } from "@/content/photos";
 
-export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "Alla Nazionale — Bar storico, eventi e catering dal 1912" },
-      {
-        name: "description",
-        content:
-          "Bar storico dal 1912. Organizziamo eventi privati, compleanni, baby shower, lauree, anniversari, feste aziendali e servizio catering.",
-      },
-      { property: "og:title", content: "Alla Nazionale — Eventi & Catering dal 1912" },
-      {
-        property: "og:description",
-        content: "Trasformiamo i tuoi momenti in ricordi indimenticabili. Bar storico, eventi privati e catering.",
-      },
-      { property: "og:image", content: "/og-home.jpg" },
-      { property: "og:url", content: "https://allanazionale.it/" },
-      { name: "twitter:title", content: "Alla Nazionale — Eventi & Catering dal 1912" },
-      {
-        name: "twitter:description",
-        content: "Bar storico dal 1912. Eventi privati, feste e catering.",
-      },
-      { name: "twitter:image", content: "/og-home.jpg" },
-    ],
-  }),
-  component: HomePage,
-});
+const heroImage = photos[HOME_PHOTOS.hero];
+const introImage = photos[HOME_PHOTOS.intro];
+const spacesImage = photos[HOME_PHOTOS.spaces];
 
-const EVENT_HIGHLIGHTS = [
-  { key: "compleanni", Icon: Calendar },
-  { key: "primo", Icon: Cake },
-  { key: "babyshower", Icon: Baby },
-  { key: "lauree", Icon: GraduationCap },
-  { key: "anniversari", Icon: Heart },
-  { key: "aziendali", Icon: Building2 },
-  { key: "catering", Icon: Utensils },
-  { key: "djset", Icon: Music },
-] as const;
+// Primeiros 8 destaques da home a partir das categorias
+const EVENT_HIGHLIGHTS = EVENT_CATEGORIES.slice(0, 8);
 
 function HomePage() {
   const { t } = useI18n();
