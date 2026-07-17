@@ -12,7 +12,7 @@ export function Footer() {
       <div className="container mx-auto grid gap-10 px-4 py-14 md:grid-cols-3 md:px-6">
         {/* Brand */}
         <div>
-          <h3 className="font-display text-2xl font-bold text-primary">Alla Nazionale</h3>
+          <h3 className="font-display text-2xl font-bold text-foreground">Alla Nazionale</h3>
           <p className="mt-1 text-xs font-medium uppercase tracking-[0.2em] text-gold">
             {t("common.since")}
           </p>

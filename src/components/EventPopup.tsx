@@ -37,7 +37,7 @@ export function EventPopup() {
       role="dialog"
       aria-modal="true"
       aria-labelledby="event-popup-title"
-      className="fixed inset-0 z-50 flex items-end justify-center bg-black/70 p-4 backdrop-blur-sm sm:items-center"
+      className="fixed inset-0 z-50 flex items-end justify-center bg-foreground/50 p-4 backdrop-blur-sm sm:items-center"
       onClick={close}
     >
       <div
