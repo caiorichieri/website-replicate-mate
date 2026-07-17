@@ -54,9 +54,10 @@ function HomePage() {
       <section className="relative isolate flex min-h-[88vh] items-center overflow-hidden">
         <img
           src={heroImage}
-          alt="Buffet elegante Alla Nazionale"
+          alt="Alla Nazionale — la nostra location per eventi"
           className="absolute inset-0 -z-20 h-full w-full object-cover"
         />
+        {/* Overlay crema traslucida sopra la foto */}
         <div className="absolute inset-0 -z-10 bg-hero-overlay" />
 
         <div className="container mx-auto px-4 py-20 md:px-6">
@@ -75,14 +76,14 @@ function HomePage() {
                 href={whatsappUrl()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-semibold text-primary-foreground transition-transform hover:scale-[1.03]"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/20 transition-transform hover:scale-[1.03]"
               >
                 {t("home.heroCta")}
                 <ArrowRight className="h-4 w-4" />
               </a>
               <Link
                 to="/spazi"
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-foreground/30 bg-background/30 px-7 py-3.5 text-sm font-semibold text-foreground backdrop-blur-sm transition-colors hover:border-primary hover:text-primary"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-foreground/40 bg-background/50 px-7 py-3.5 text-sm font-semibold text-foreground backdrop-blur-sm transition-colors hover:border-primary hover:text-primary"
               >
                 {t("home.heroSecondary")}
               </Link>
@@ -96,31 +97,25 @@ function HomePage() {
         <div className="relative h-[80vh] min-h-[600px] w-full overflow-hidden md:h-[90vh]">
           <img
             src={introImage}
-            alt="Allestimento prosecco Alla Nazionale"
+            alt="La famiglia Cinelli — Alla Nazionale"
             className="absolute inset-0 h-full w-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent md:via-background/60" />
-          <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-side-overlay-left" />
 
           <div className="container relative mx-auto flex h-full items-center px-4 md:px-6">
             <div className="max-w-xl animate-fade-up">
               <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gold">{t("home.introEyebrow")}</p>
-              <h2 className="mt-4 font-display text-4xl font-bold leading-tight text-foreground sm:text-5xl md:text-6xl">
+              <h2 className="mt-4 font-display text-3xl font-bold leading-tight text-foreground sm:text-4xl md:text-5xl">
                 {t("home.introTitle")}
               </h2>
-              <p className="mt-6 text-base leading-relaxed text-foreground/85 md:text-lg">{t("home.introText")}</p>
+              <p className="mt-6 text-sm leading-relaxed text-foreground/85 md:text-base">{t("home.introText")}</p>
               <Link
                 to="/chi-siamo"
-                className="mt-8 inline-flex items-center gap-2 rounded-full border border-gold/50 bg-background/40 px-6 py-3 text-sm font-semibold text-gold backdrop-blur-sm transition-all hover:bg-gold hover:text-gold-foreground"
+                className="mt-8 inline-flex items-center gap-2 rounded-full border border-gold/60 bg-background/60 px-6 py-3 text-sm font-semibold text-gold backdrop-blur-sm transition-all hover:bg-gold hover:text-gold-foreground"
               >
                 {t("common.discover")} <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
-          </div>
-
-          <div className="absolute bottom-8 right-8 hidden rounded-2xl border border-gold/30 bg-background/70 px-6 py-5 text-foreground shadow-2xl backdrop-blur-md md:block">
-            <p className="font-display text-4xl font-bold leading-none text-gold">110+</p>
-            <p className="mt-2 text-xs font-semibold uppercase tracking-wider text-foreground/80">anni di storia</p>
           </div>
         </div>
       </section>
@@ -140,9 +135,9 @@ function HomePage() {
             {EVENT_HIGHLIGHTS.map(({ key, Icon }) => (
               <div
                 key={key}
-                className="group rounded-2xl border border-border/60 bg-background p-5 text-center transition-all hover:-translate-y-1 hover:border-primary/60 hover:shadow-lg hover:shadow-primary/10 md:p-7"
+                className="group rounded-2xl border border-border bg-background p-5 text-center transition-all hover:-translate-y-1 hover:border-primary hover:shadow-lg hover:shadow-primary/10 md:p-7"
               >
-                <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+                <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary/15 text-gold transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
                   <Icon className="h-5 w-5" />
                 </div>
                 <h3 className="mt-4 font-display text-base font-semibold text-foreground md:text-lg">
@@ -163,27 +158,26 @@ function HomePage() {
         </div>
       </section>
 
-      {/* SPAZI — full-bleed cinematográfico, texto à direita */}
+      {/* SPAZI / PERSONALIZZAZIONE — full-bleed, texto à direita */}
       <section className="relative w-full">
         <div className="relative h-[80vh] min-h-[600px] w-full overflow-hidden md:h-[90vh]">
           <img
             src={spacesImage}
-            alt="Area esterna coperta Alla Nazionale"
+            alt="Personalizziamo ogni evento nei minimi dettagli"
             className="absolute inset-0 h-full w-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-l from-background via-background/80 to-transparent md:via-background/60" />
-          <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-side-overlay-right" />
 
           <div className="container relative mx-auto flex h-full items-center justify-end px-4 md:px-6">
             <div className="max-w-xl animate-fade-up text-left md:text-right">
               <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gold">{t("home.spacesEyebrow")}</p>
-              <h2 className="mt-4 font-display text-4xl font-bold leading-tight text-foreground sm:text-5xl md:text-6xl">
+              <h2 className="mt-4 font-display text-3xl font-bold leading-tight text-foreground sm:text-4xl md:text-5xl">
                 {t("home.spacesTitle")}
               </h2>
               <p className="mt-6 text-base leading-relaxed text-foreground/85 md:text-lg">{t("home.spacesText")}</p>
               <Link
                 to="/spazi"
-                className="mt-8 inline-flex items-center gap-2 rounded-full border border-gold/50 bg-background/40 px-6 py-3 text-sm font-semibold text-gold backdrop-blur-sm transition-all hover:bg-gold hover:text-gold-foreground"
+                className="mt-8 inline-flex items-center gap-2 rounded-full border border-gold/60 bg-background/60 px-6 py-3 text-sm font-semibold text-gold backdrop-blur-sm transition-all hover:bg-gold hover:text-gold-foreground"
               >
                 {t("common.discover")} <ArrowRight className="h-4 w-4" />
               </Link>
@@ -194,7 +188,7 @@ function HomePage() {
 
       {/* CTA FINALE */}
       <section className="container mx-auto px-4 pb-24 md:px-6">
-        <div className="overflow-hidden rounded-3xl border border-gold/30 bg-gradient-to-br from-card via-card to-background px-6 py-14 text-center md:px-12 md:py-20">
+        <div className="overflow-hidden rounded-3xl border border-gold/40 bg-gradient-to-br from-secondary via-card to-background px-6 py-14 text-center md:px-12 md:py-20">
           <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gold">{t("common.bookEvent")}</p>
           <h2 className="mx-auto mt-4 max-w-3xl font-display text-3xl font-bold text-foreground sm:text-4xl md:text-5xl">
             {t("home.ctaTitle")}
@@ -212,7 +206,7 @@ function HomePage() {
             </a>
             <Link
               to="/contatti"
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-foreground/30 px-7 py-3.5 text-sm font-semibold text-foreground transition-colors hover:border-primary hover:text-primary"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-foreground/40 px-7 py-3.5 text-sm font-semibold text-foreground transition-colors hover:border-primary hover:text-primary"
             >
               {t("nav.contact")}
             </Link>
