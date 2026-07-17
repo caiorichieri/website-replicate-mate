@@ -1,18 +1,10 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { X } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
 import { useI18n } from "@/lib/i18n";
-import img01 from "@/assets/gallery-01-buffet-18anni.jpg";
-import img02 from "@/assets/gallery-02-pneu-prosecco.jpg";
-import img03 from "@/assets/gallery-03-fingerfood.jpg";
-import img04 from "@/assets/gallery-04-team.jpg";
-import img05 from "@/assets/gallery-05-buffet-tavole.jpg";
-import img06 from "@/assets/gallery-06-sala-interna.jpg";
-import img07 from "@/assets/gallery-07-area-esterna.jpg";
-import img08 from "@/assets/gallery-08-giardino.jpg";
-import img09 from "@/assets/gallery-09-djset.jpg";
-import img10 from "@/assets/gallery-10-aperitivo.jpg";
+import { GALLERY, GALLERY_FILTERS } from "@/content/site";
+import { photos } from "@/content/photos";
 
 export const Route = createFileRoute("/galleria")({
   head: () => ({
@@ -21,36 +13,29 @@ export const Route = createFileRoute("/galleria")({
       {
         name: "description",
         content:
-          "Sfoglia le foto dei nostri eventi: compleanni, baby shower, feste private, buffet, allestimenti e spazi.",
+          "Sfoglia le foto dei nostri eventi: compleanni, baby shower, lauree, feste private, buffet, allestimenti e spazi. Filtra per categoria.",
       },
       { property: "og:title", content: "Galleria — Alla Nazionale" },
       {
         property: "og:description",
         content: "Le foto dei nostri eventi e dei nostri spazi.",
       },
-      { property: "og:image", content: "/og-gallery.jpg" },
     ],
   }),
   component: GalleryPage,
 });
 
-const IMAGES = [
-  { src: img05, alt: "Buffet con tavole di legno" },
-  { src: img02, alt: "Pneumatico Goodyear come secchiello con prosecco" },
-  { src: img01, alt: "Festa di 18 anni con arco di palloncini" },
-  { src: img03, alt: "Finger food con fiori freschi" },
-  { src: img06, alt: "Sala interna allestita per evento" },
-  { src: img07, alt: "Area esterna coperta" },
-  { src: img04, alt: "Team Alla Nazionale" },
-  { src: img09, alt: "DJ set durante una festa" },
-  { src: img08, alt: "Giardino con dettagli rustici" },
-  { src: img10, alt: "Buffet di aperitivo" },
-];
-
 function GalleryPage() {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
+  const [filter, setFilter] = useState<string>("all");
   const [activeIdx, setActiveIdx] = useState<number | null>(null);
-  const active = activeIdx !== null ? IMAGES[activeIdx] : null;
+
+  const filtered = useMemo(() => {
+    if (filter === "all") return GALLERY;
+    return GALLERY.filter((g) => g.categories.includes(filter));
+  }, [filter]);
+
+  const active = activeIdx !== null ? filtered[activeIdx] : null;
 
   return (
     <SiteLayout>
@@ -65,18 +50,43 @@ function GalleryPage() {
           <p className="mt-5 text-lg text-muted-foreground">{t("gallery.subtitle")}</p>
         </div>
 
-        <div className="mt-14 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-4">
-          {IMAGES.map((image, idx) => (
+        {/* Filtros */}
+        <div className="mt-10 flex flex-wrap justify-center gap-2">
+          {GALLERY_FILTERS.map((f) => {
+            const isActive = filter === f.id;
+            return (
+              <button
+                key={f.id}
+                type="button"
+                onClick={() => {
+                  setFilter(f.id);
+                  setActiveIdx(null);
+                }}
+                className={`rounded-full border px-4 py-1.5 text-xs font-semibold uppercase tracking-wider transition-all ${
+                  isActive
+                    ? "border-primary bg-primary text-primary-foreground shadow"
+                    : "border-border bg-background text-muted-foreground hover:border-primary hover:text-foreground"
+                }`}
+              >
+                {f.label[locale]}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Grid */}
+        <div className="mt-10 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-4">
+          {filtered.map((item, idx) => (
             <button
-              key={idx}
+              key={`${item.photoId}-${idx}`}
               type="button"
               onClick={() => setActiveIdx(idx)}
               className="group relative aspect-square overflow-hidden rounded-xl bg-card focus:outline-none focus:ring-2 focus:ring-primary"
-              aria-label={`Open image ${idx + 1}`}
+              aria-label={item.alt[locale]}
             >
               <img
-                src={image.src}
-                alt={image.alt}
+                src={photos[item.photoId]}
+                alt={item.alt[locale]}
                 loading="lazy"
                 className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
               />
@@ -84,6 +94,12 @@ function GalleryPage() {
             </button>
           ))}
         </div>
+
+        {filtered.length === 0 && (
+          <p className="mt-16 text-center text-muted-foreground">
+            {locale === "it" ? "Nessuna foto in questa categoria." : "No photos in this category."}
+          </p>
+        )}
       </section>
 
       {/* Lightbox */}
@@ -103,8 +119,8 @@ function GalleryPage() {
             <X className="h-5 w-5" />
           </button>
           <img
-            src={active.src}
-            alt={active.alt}
+            src={photos[active.photoId]}
+            alt={active.alt[locale]}
             className="max-h-[90vh] max-w-[95vw] rounded-lg object-contain shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           />
