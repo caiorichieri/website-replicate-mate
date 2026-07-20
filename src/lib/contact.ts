@@ -9,7 +9,7 @@ export const CONTACT = {
   siteName: "Alla Nazionale",
   siteUrl: "https://allanazionale.it",
   since: 1912,
-  city: "Verona",
+  city: "Codroipo",
   country: "Italia",
 };
 
