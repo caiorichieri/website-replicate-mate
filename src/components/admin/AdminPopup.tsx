@@ -125,7 +125,15 @@ export function AdminPopup() {
       </section>
 
       <section className="space-y-3 rounded-xl border border-border bg-card p-5">
-        <h3 className="font-semibold text-foreground">Immagine</h3>
+        <div className="flex items-start justify-between gap-3">
+          <h3 className="font-semibold text-foreground">Immagine</h3>
+          <span className="rounded-full border border-border bg-background px-2.5 py-1 text-xs font-medium text-muted-foreground">
+            1200 × 450 px
+          </span>
+        </div>
+        <p className="text-xs text-muted-foreground">
+          Dimensione consigliata per l'immagine del popup. Se l'arte ha altre proporzioni, il popup la ritaglia automaticamente a copertura.
+        </p>
         {data.image_url ? (
           <div className="relative inline-block">
             <img src={data.image_url} alt="" className="max-h-48 rounded-lg" />
