@@ -34,7 +34,7 @@ function HomePage() {
         <div className="absolute inset-0 -z-10 bg-hero-overlay" />
 
         <div className="container mx-auto px-4 py-20 md:px-6">
-          <div className="max-w-3xl animate-fade-up">
+          <div className="max-w-3xl animate-fade-up text-overlay-card">
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gold">
               {t("common.tagline")} · {t("common.since")}
             </p>
