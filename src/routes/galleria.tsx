@@ -1,10 +1,11 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { X } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
 import { useI18n } from "@/lib/i18n";
 import { GALLERY, GALLERY_FILTERS } from "@/content/site";
 import { photos } from "@/content/photos";
+import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/galleria")({
   head: () => ({
@@ -16,24 +17,75 @@ export const Route = createFileRoute("/galleria")({
           "Sfoglia le foto dei nostri eventi: compleanni, baby shower, lauree, feste private, buffet, allestimenti e spazi. Filtra per categoria.",
       },
       { property: "og:title", content: "Galleria — Alla Nazionale" },
-      {
-        property: "og:description",
-        content: "Le foto dei nostri eventi e dei nostri spazi.",
-      },
+      { property: "og:description", content: "Le foto dei nostri eventi e dei nostri spazi." },
     ],
   }),
   component: GalleryPage,
 });
 
+type DbPhoto = {
+  id: string;
+  url: string;
+  alt_it: string;
+  alt_en: string;
+  category_slugs: string[];
+  sort_order: number;
+};
+
+type DbCategory = { slug: string; title_it: string; title_en: string; sort_order: number };
+
+type Item = {
+  key: string;
+  src: string;
+  alt: { it: string; en: string };
+  categories: string[];
+};
+
 function GalleryPage() {
   const { t, locale } = useI18n();
   const [filter, setFilter] = useState<string>("all");
   const [activeIdx, setActiveIdx] = useState<number | null>(null);
+  const [dbPhotos, setDbPhotos] = useState<DbPhoto[]>([]);
+  const [dbCats, setDbCats] = useState<DbCategory[]>([]);
+
+  useEffect(() => {
+    Promise.all([
+      supabase.from("gallery_photos").select("*").order("sort_order").order("created_at", { ascending: false }),
+      supabase.from("gallery_categories").select("*").order("sort_order").order("title_it"),
+    ]).then(([p, c]) => {
+      setDbPhotos((p.data ?? []) as DbPhoto[]);
+      setDbCats((c.data ?? []) as DbCategory[]);
+    });
+  }, []);
+
+  const allItems: Item[] = useMemo(() => {
+    const staticItems: Item[] = GALLERY.map((g, idx) => ({
+      key: `s-${idx}-${g.photoId}`,
+      src: photos[g.photoId],
+      alt: g.alt,
+      categories: g.categories,
+    }));
+    const dbItems: Item[] = dbPhotos.map((p) => ({
+      key: `db-${p.id}`,
+      src: p.url,
+      alt: { it: p.alt_it, en: p.alt_en },
+      categories: p.category_slugs,
+    }));
+    return [...dbItems, ...staticItems];
+  }, [dbPhotos]);
+
+  const filters = useMemo(() => {
+    const staticSlugs = new Set(GALLERY_FILTERS.map((f) => f.id));
+    const extras = dbCats
+      .filter((c) => !staticSlugs.has(c.slug))
+      .map((c) => ({ id: c.slug, label: { it: c.title_it, en: c.title_en } }));
+    return [...GALLERY_FILTERS, ...extras];
+  }, [dbCats]);
 
   const filtered = useMemo(() => {
-    if (filter === "all") return GALLERY;
-    return GALLERY.filter((g) => g.categories.includes(filter));
-  }, [filter]);
+    if (filter === "all") return allItems;
+    return allItems.filter((g) => g.categories.includes(filter));
+  }, [filter, allItems]);
 
   const active = activeIdx !== null ? filtered[activeIdx] : null;
 
@@ -41,18 +93,15 @@ function GalleryPage() {
     <SiteLayout>
       <section className="container mx-auto px-4 py-16 md:px-6 md:py-24">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gold">
-            {t("common.since")}
-          </p>
+          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gold">{t("common.since")}</p>
           <h1 className="mt-4 font-display text-4xl font-bold text-foreground sm:text-5xl md:text-6xl">
             {t("gallery.title")}
           </h1>
           <p className="mt-5 text-lg text-muted-foreground">{t("gallery.subtitle")}</p>
         </div>
 
-        {/* Filtros */}
         <div className="mt-10 flex flex-wrap justify-center gap-2">
-          {GALLERY_FILTERS.map((f) => {
+          {filters.map((f) => {
             const isActive = filter === f.id;
             return (
               <button
@@ -74,18 +123,17 @@ function GalleryPage() {
           })}
         </div>
 
-        {/* Grid */}
         <div className="mt-10 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-4">
           {filtered.map((item, idx) => (
             <button
-              key={`${item.photoId}-${idx}`}
+              key={item.key}
               type="button"
               onClick={() => setActiveIdx(idx)}
               className="group relative aspect-square overflow-hidden rounded-xl bg-card focus:outline-none focus:ring-2 focus:ring-primary"
               aria-label={item.alt[locale]}
             >
               <img
-                src={photos[item.photoId]}
+                src={item.src}
                 alt={item.alt[locale]}
                 loading="lazy"
                 className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
@@ -102,7 +150,6 @@ function GalleryPage() {
         )}
       </section>
 
-      {/* Lightbox */}
       {active && (
         <div
           role="dialog"
@@ -119,7 +166,7 @@ function GalleryPage() {
             <X className="h-5 w-5" />
           </button>
           <img
-            src={photos[active.photoId]}
+            src={active.src}
             alt={active.alt[locale]}
             className="max-h-[90vh] max-w-[95vw] rounded-lg object-contain shadow-2xl"
             onClick={(e) => e.stopPropagation()}

@@ -2,22 +2,49 @@ import { useEffect, useState } from "react";
 import { MessageCircle, X } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import { whatsappUrl } from "@/lib/contact";
+import { supabase } from "@/integrations/supabase/client";
 import buffetImage from "@/assets/gallery-05-buffet-tavole.jpg";
 
 const STORAGE_KEY = "alla-nazionale-popup-dismissed";
-const SHOW_DELAY_MS = 8000;
+
+type PopupData = {
+  enabled: boolean;
+  title_it: string;
+  title_en: string;
+  text_it: string;
+  text_en: string;
+  cta_it: string;
+  cta_en: string;
+  dismiss_it: string;
+  dismiss_en: string;
+  image_url: string | null;
+  link_type: "whatsapp" | "url";
+  link_value: string;
+  delay_ms: number;
+};
 
 export function EventPopup() {
   const { t, locale } = useI18n();
   const [open, setOpen] = useState(false);
+  const [data, setData] = useState<PopupData | null>(null);
+
+  useEffect(() => {
+    supabase
+      .from("popup_settings")
+      .select("*")
+      .eq("id", 1)
+      .maybeSingle()
+      .then(({ data }) => setData(data as PopupData | null));
+  }, []);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
+    if (!data || !data.enabled) return;
     if (window.sessionStorage.getItem(STORAGE_KEY)) return;
 
-    const timer = window.setTimeout(() => setOpen(true), SHOW_DELAY_MS);
+    const timer = window.setTimeout(() => setOpen(true), data.delay_ms ?? 8000);
     return () => window.clearTimeout(timer);
-  }, []);
+  }, [data]);
 
   const close = () => {
     setOpen(false);
@@ -26,11 +53,22 @@ export function EventPopup() {
     }
   };
 
-  if (!open) return null;
+  if (!open || !data) return null;
 
-  const waMessage = locale === "it"
-    ? "Ciao! Ho visto il vostro sito e vorrei informazioni per organizzare un evento."
-    : "Hi! I saw your website and I'd like info about hosting an event.";
+  const title = locale === "it" ? data.title_it : data.title_en;
+  const text = locale === "it" ? data.text_it : data.text_en;
+  const cta = locale === "it" ? data.cta_it : data.cta_en;
+  const dismiss = locale === "it" ? data.dismiss_it : data.dismiss_en;
+
+  const href =
+    data.link_type === "url" && data.link_value
+      ? data.link_value
+      : whatsappUrl(
+          data.link_value ||
+            (locale === "it"
+              ? "Ciao! Ho visto il vostro sito e vorrei informazioni per organizzare un evento."
+              : "Hi! I saw your website and I'd like info about hosting an event."),
+        );
 
   return (
     <div
@@ -54,42 +92,34 @@ export function EventPopup() {
         </button>
 
         <div className="relative h-40 overflow-hidden sm:h-48">
-          <img
-            src={buffetImage}
-            alt=""
-            className="h-full w-full object-cover"
-          />
+          <img src={data.image_url || buffetImage} alt="" className="h-full w-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-card via-card/40 to-transparent" />
         </div>
 
         <div className="px-6 pb-6 pt-2 sm:px-8 sm:pb-8">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">
-            {t("common.since")}
-          </p>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">{t("common.since")}</p>
           <h3 id="event-popup-title" className="mt-2 font-display text-2xl font-bold text-foreground sm:text-3xl">
-            {t("popup.title")}
+            {title}
           </h3>
-          <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-            {t("popup.text")}
-          </p>
+          <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{text}</p>
 
           <div className="mt-6 flex flex-col gap-2 sm:flex-row">
             <a
-              href={whatsappUrl(waMessage)}
+              href={href}
               target="_blank"
               rel="noopener noreferrer"
               onClick={close}
               className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-whatsapp px-5 py-3 text-sm font-semibold text-white transition-transform hover:scale-[1.02]"
             >
               <MessageCircle className="h-4 w-4" />
-              {t("popup.cta")}
+              {cta}
             </a>
             <button
               type="button"
               onClick={close}
               className="rounded-full border border-border px-5 py-3 text-sm font-medium text-muted-foreground transition-colors hover:border-foreground/40 hover:text-foreground"
             >
-              {t("popup.dismiss")}
+              {dismiss}
             </button>
           </div>
         </div>
