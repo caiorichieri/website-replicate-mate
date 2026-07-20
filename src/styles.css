@@ -160,35 +160,38 @@
   }
 
   /* Overlay caldo per foto full-bleed (crema traslucida).
-   * Su mobile l'overlay è molto più opaco: il testo si sovrappone
-   * a tutta la foto, quindi serve più contrasto. */
+   * Su mobile lasciamo la foto ben visibile nella parte alta e
+   * appiattiamo solo il fondo, dove sta il testo. Il testo mobile
+   * ha un suo card con sfondo opaco via .text-overlay-card. */
   .bg-hero-overlay {
     background-image: linear-gradient(
       to bottom,
-      oklch(0.975 0.028 92 / 0.7) 0%,
-      oklch(0.975 0.028 92 / 0.85) 55%,
-      oklch(0.975 0.028 92 / 0.95) 100%
+      oklch(0.975 0.028 92 / 0.15) 0%,
+      oklch(0.975 0.028 92 / 0.35) 50%,
+      oklch(0.975 0.028 92 / 0.65) 100%
     );
   }
   @media (min-width: 768px) {
     .bg-hero-overlay {
       background-image: linear-gradient(
         to bottom,
-        oklch(0.975 0.028 92 / 0.35) 0%,
-        oklch(0.975 0.028 92 / 0.65) 55%,
-        oklch(0.975 0.028 92 / 0.9) 100%
+        oklch(0.975 0.028 92 / 0.2) 0%,
+        oklch(0.975 0.028 92 / 0.55) 55%,
+        oklch(0.975 0.028 92 / 0.85) 100%
       );
     }
   }
 
-  /* Overlay laterale caldo — su mobile diventa un velo pieno
-   * per garantire leggibilità del testo sopra la foto. */
+  /* Overlay laterale caldo — su mobile usiamo un gradiente dal basso
+   * verso l'alto, così la foto resta ben visibile in alto e il testo
+   * in basso ha comunque un minimo di contrasto. */
   .bg-side-overlay-left,
   .bg-side-overlay-right {
     background-image: linear-gradient(
-      to bottom,
+      to top,
       oklch(0.975 0.028 92 / 0.82) 0%,
-      oklch(0.975 0.028 92 / 0.9) 100%
+      oklch(0.975 0.028 92 / 0.45) 45%,
+      transparent 75%
     );
   }
   @media (min-width: 768px) {
@@ -209,6 +212,25 @@
         oklch(0.975 0.028 92 / 0.2) 75%,
         transparent 100%
       );
+    }
+  }
+
+  /* Card semitrasparente per il testo su mobile: legge senza
+   * coprire l'immagine sotto. Su desktop si fonde con l'overlay. */
+  .text-overlay-card {
+    border-radius: 1rem;
+    background-color: oklch(0.975 0.028 92 / 0.75);
+    padding: 1.5rem;
+    --tw-backdrop-blur: blur(12px);
+    backdrop-filter: var(--tw-backdrop-blur);
+    box-shadow: 0 20px 40px -12px oklch(0.22 0.02 60 / 0.15);
+  }
+  @media (min-width: 768px) {
+    .text-overlay-card {
+      background-color: transparent;
+      padding: 0;
+      backdrop-filter: none;
+      box-shadow: none;
     }
   }
 
