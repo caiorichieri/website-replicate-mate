@@ -76,7 +76,7 @@ function HomePage() {
           <div className="absolute inset-0 bg-side-overlay-left" />
 
           <div className="container relative mx-auto flex h-full items-center px-4 md:px-6">
-            <div className="max-w-xl animate-fade-up">
+            <div className="max-w-xl animate-fade-up text-overlay-card">
               <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gold">{t("home.introEyebrow")}</p>
               <h2 className="mt-4 font-display text-3xl font-bold leading-tight text-foreground sm:text-4xl md:text-5xl">
                 {t("home.introTitle")}
