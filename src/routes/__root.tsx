@@ -41,6 +41,12 @@ export const Route = createRootRoute({
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "it_IT" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:title", content: "Alla Nazionale — Bar storico, eventi e catering dal 1912" },
+      { name: "twitter:title", content: "Alla Nazionale — Bar storico, eventi e catering dal 1912" },
+      { property: "og:description", content: "Bar storico Alla Nazionale, dal 1912. Organizziamo eventi privati, compleanni, baby shower, lauree, anniversari, feste aziendali e catering." },
+      { name: "twitter:description", content: "Bar storico Alla Nazionale, dal 1912. Organizziamo eventi privati, compleanni, baby shower, lauree, anniversari, feste aziendali e catering." },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/273c6d33-a36a-4241-bebe-e4ef50aaaac2" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/273c6d33-a36a-4241-bebe-e4ef50aaaac2" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
