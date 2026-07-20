@@ -159,56 +159,67 @@
     background-image: linear-gradient(135deg, var(--color-gold), var(--color-primary));
   }
 
-  /* Overlay caldo per foto full-bleed (crema traslucida).
-   * Su mobile l'overlay è molto più opaco: il testo si sovrappone
-   * a tutta la foto, quindi serve più contrasto. */
+  /* Overlay caldo per foto full-bleed — leggero, così la foto respira.
+   * La leggibilità del testo è garantita da .glass-panel intorno al copy. */
   .bg-hero-overlay {
     background-image: linear-gradient(
       to bottom,
-      oklch(0.975 0.028 92 / 0.7) 0%,
-      oklch(0.975 0.028 92 / 0.85) 55%,
-      oklch(0.975 0.028 92 / 0.95) 100%
+      oklch(0.975 0.028 92 / 0.15) 0%,
+      oklch(0.22 0.02 60 / 0.25) 60%,
+      oklch(0.22 0.02 60 / 0.5) 100%
     );
   }
   @media (min-width: 768px) {
     .bg-hero-overlay {
       background-image: linear-gradient(
         to bottom,
-        oklch(0.975 0.028 92 / 0.35) 0%,
-        oklch(0.975 0.028 92 / 0.65) 55%,
-        oklch(0.975 0.028 92 / 0.9) 100%
+        oklch(0.975 0.028 92 / 0.2) 0%,
+        oklch(0.975 0.028 92 / 0.45) 55%,
+        oklch(0.975 0.028 92 / 0.75) 100%
       );
     }
   }
 
-  /* Overlay laterale caldo — su mobile diventa un velo pieno
-   * per garantire leggibilità del testo sopra la foto. */
   .bg-side-overlay-left,
   .bg-side-overlay-right {
     background-image: linear-gradient(
       to bottom,
-      oklch(0.975 0.028 92 / 0.82) 0%,
-      oklch(0.975 0.028 92 / 0.9) 100%
+      oklch(0.22 0.02 60 / 0.15) 0%,
+      oklch(0.22 0.02 60 / 0.35) 100%
     );
   }
   @media (min-width: 768px) {
     .bg-side-overlay-left {
       background-image: linear-gradient(
         to right,
-        oklch(0.975 0.028 92 / 0.95) 0%,
-        oklch(0.975 0.028 92 / 0.75) 40%,
-        oklch(0.975 0.028 92 / 0.2) 75%,
+        oklch(0.975 0.028 92 / 0.9) 0%,
+        oklch(0.975 0.028 92 / 0.6) 40%,
+        oklch(0.975 0.028 92 / 0.1) 75%,
         transparent 100%
       );
     }
     .bg-side-overlay-right {
       background-image: linear-gradient(
         to left,
-        oklch(0.975 0.028 92 / 0.95) 0%,
-        oklch(0.975 0.028 92 / 0.75) 40%,
-        oklch(0.975 0.028 92 / 0.2) 75%,
+        oklch(0.975 0.028 92 / 0.9) 0%,
+        oklch(0.975 0.028 92 / 0.6) 40%,
+        oklch(0.975 0.028 92 / 0.1) 75%,
         transparent 100%
       );
+    }
+  }
+
+  /* Glass panel — cornice cremosa traslucida dietro al testo sopra foto.
+   * Mantiene la foto visibile ma dà contrasto e forma editoriale al copy. */
+  .glass-panel {
+    background-color: oklch(0.975 0.028 92 / 0.82);
+    backdrop-filter: blur(14px) saturate(140%);
+    border: 1px solid oklch(0.975 0.028 92 / 0.6);
+    box-shadow: 0 20px 60px -20px oklch(0.22 0.02 60 / 0.35);
+  }
+  @media (min-width: 768px) {
+    .glass-panel {
+      background-color: oklch(0.975 0.028 92 / 0.7);
     }
   }
 

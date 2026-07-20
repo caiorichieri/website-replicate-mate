@@ -34,7 +34,7 @@ function HomePage() {
         <div className="absolute inset-0 -z-10 bg-hero-overlay" />
 
         <div className="container mx-auto px-4 py-20 md:px-6">
-          <div className="max-w-3xl animate-fade-up">
+          <div className="max-w-2xl animate-fade-up rounded-3xl glass-panel p-7 sm:p-10">
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gold">
               {t("common.tagline")} · {t("common.since")}
             </p>
@@ -76,7 +76,7 @@ function HomePage() {
           <div className="absolute inset-0 bg-side-overlay-left" />
 
           <div className="container relative mx-auto flex h-full items-center px-4 md:px-6">
-            <div className="max-w-xl animate-fade-up">
+            <div className="max-w-xl animate-fade-up rounded-3xl glass-panel p-7 sm:p-9">
               <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gold">{t("home.introEyebrow")}</p>
               <h2 className="mt-4 font-display text-3xl font-bold leading-tight text-foreground sm:text-4xl md:text-5xl">
                 {t("home.introTitle")}
@@ -142,7 +142,7 @@ function HomePage() {
           <div className="absolute inset-0 bg-side-overlay-right" />
 
           <div className="container relative mx-auto flex h-full items-center justify-end px-4 md:px-6">
-            <div className="max-w-xl animate-fade-up text-left md:text-right">
+            <div className="max-w-xl animate-fade-up rounded-3xl glass-panel p-7 text-left sm:p-9 md:text-right">
               <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gold">{t("home.spacesEyebrow")}</p>
               <h2 className="mt-4 font-display text-3xl font-bold leading-tight text-foreground sm:text-4xl md:text-5xl">
                 {t("home.spacesTitle")}
