@@ -80,6 +80,9 @@ function HomePage() {
           <img
             src={introImage}
             alt="La famiglia Cinelli — Alla Nazionale"
+            width={1600}
+            height={900}
+            loading="lazy"
             className="absolute inset-0 h-full w-full object-cover"
           />
           <div className="absolute inset-0 bg-side-overlay-left" />
