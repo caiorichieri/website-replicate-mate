@@ -172,7 +172,9 @@ export function AdminPhotos() {
                   />
                 </div>
                 <div>
-                  <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Categorie</p>
+                  <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                    Categorie <span className="font-normal normal-case tracking-normal text-muted-foreground/70">— clicca per aggiungere o rimuovere</span>
+                  </p>
                   <div className="flex flex-wrap gap-1.5">
                     {cats.map((c) => {
                       const active = p.category_slugs.includes(c.slug);
@@ -180,17 +182,27 @@ export function AdminPhotos() {
                         <button
                           key={c.slug}
                           onClick={() => toggleCat(p, c.slug)}
-                          className={`rounded-full border px-2.5 py-1 text-xs transition-colors ${
+                          title={active ? "Rimuovi da questa categoria" : "Aggiungi a questa categoria"}
+                          className={`inline-flex items-center gap-1 rounded-full border px-2.5 py-1 text-xs transition-colors ${
                             active
-                              ? "border-primary bg-primary text-primary-foreground"
+                              ? "border-primary bg-primary text-primary-foreground hover:bg-destructive hover:border-destructive"
                               : "border-border text-muted-foreground hover:border-primary"
                           }`}
                         >
                           {c.title_it}
+                          {active && <span aria-hidden className="text-[10px] leading-none">✕</span>}
                         </button>
                       );
                     })}
                   </div>
+                  {p.category_slugs.length > 0 && (
+                    <button
+                      onClick={() => patch(p.id, { category_slugs: [] })}
+                      className="mt-2 text-xs text-destructive hover:underline"
+                    >
+                      Rimuovi da tutte le categorie
+                    </button>
+                  )}
                 </div>
                 <div className="flex items-center justify-between gap-2">
                   <label className="flex items-center gap-2 text-xs text-muted-foreground">
