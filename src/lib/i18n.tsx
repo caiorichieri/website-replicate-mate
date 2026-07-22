@@ -122,6 +122,7 @@ const translations: Translations = {
     "footer.privacy": "Privacy Policy",
     "footer.cookies": "Cookie Policy",
     "footer.terms": "Termini e condizioni",
+    "footer.cookiePrefs": "Preferenze cookie",
     "footer.developedBy": "Sviluppato da",
   },
 
@@ -241,6 +242,7 @@ const translations: Translations = {
     "footer.privacy": "Privacy Policy",
     "footer.cookies": "Cookie Policy",
     "footer.terms": "Terms & conditions",
+    "footer.cookiePrefs": "Cookie preferences",
     "footer.developedBy": "Developed by",
   },
 };

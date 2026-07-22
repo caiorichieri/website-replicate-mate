@@ -4,6 +4,7 @@ import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { WhatsAppFloat } from "./WhatsAppFloat";
 import { EventPopup } from "./EventPopup";
+import { CookieBanner } from "./CookieBanner";
 
 /**
  * Fix per mobile: alcune combinazioni di SSR + hash restoration facevano
@@ -29,6 +30,7 @@ export function SiteLayout({ children }: { children: React.ReactNode }) {
       <Footer />
       <WhatsAppFloat />
       <EventPopup />
+      <CookieBanner />
     </div>
   );
 }
