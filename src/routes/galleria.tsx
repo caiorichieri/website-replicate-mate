@@ -43,7 +43,6 @@ type Item = {
 
 function GalleryPage() {
   const { t, locale } = useI18n();
-  const [filter, setFilter] = useState<string>("all");
   const [activeIdx, setActiveIdx] = useState<number | null>(null);
   const [dbPhotos, setDbPhotos] = useState<DbPhoto[]>([]);
   const [dbCats, setDbCats] = useState<DbCategory[]>([]);
@@ -74,22 +73,35 @@ function GalleryPage() {
     return dbItems.length > 0 ? dbItems : staticItems;
   }, [dbPhotos]);
 
-  const filters = useMemo(() => {
-    if (dbCats.length === 0) return GALLERY_FILTERS;
-    const all = GALLERY_FILTERS.find((f) => f.id === "all");
-    const fromDb = dbCats.map((c) => ({
-      id: c.slug,
-      label: { it: c.title_it, en: c.title_en },
-    }));
-    return all ? [all, ...fromDb] : fromDb;
+  const categories = useMemo(() => {
+    if (dbCats.length > 0) {
+      return dbCats.map((c) => ({ id: c.slug, label: { it: c.title_it, en: c.title_en } }));
+    }
+    return GALLERY_FILTERS.filter((f) => f.id !== "all");
   }, [dbCats]);
 
-  const filtered = useMemo(() => {
-    if (filter === "all") return allItems;
-    return allItems.filter((g) => g.categories.includes(filter));
-  }, [filter, allItems]);
+  const sections = useMemo(() => {
+    const result = categories
+      .map((cat) => ({
+        id: cat.id,
+        label: cat.label,
+        items: allItems.filter((it) => it.categories.includes(cat.id)),
+      }))
+      .filter((s) => s.items.length > 0);
+    const categorized = new Set(result.flatMap((s) => s.items.map((i) => i.key)));
+    const uncategorized = allItems.filter((it) => !categorized.has(it.key));
+    if (uncategorized.length > 0) {
+      result.push({
+        id: "other",
+        label: { it: "Altre foto", en: "Other photos" },
+        items: uncategorized,
+      });
+    }
+    return result;
+  }, [categories, allItems]);
 
-  const active = activeIdx !== null ? filtered[activeIdx] : null;
+  const flatItems = useMemo(() => sections.flatMap((s) => s.items), [sections]);
+  const active = activeIdx !== null ? flatItems[activeIdx] : null;
 
   return (
     <SiteLayout>
@@ -102,53 +114,47 @@ function GalleryPage() {
           <p className="mt-5 text-lg text-muted-foreground">{t("gallery.subtitle")}</p>
         </div>
 
-        <div className="mt-10 flex flex-wrap justify-center gap-2">
-          {filters.map((f) => {
-            const isActive = filter === f.id;
-            return (
-              <button
-                key={f.id}
-                type="button"
-                onClick={() => {
-                  setFilter(f.id);
-                  setActiveIdx(null);
-                }}
-                className={`rounded-full border px-4 py-1.5 text-xs font-semibold uppercase tracking-wider transition-all ${
-                  isActive
-                    ? "border-primary bg-primary text-primary-foreground shadow"
-                    : "border-border bg-background text-muted-foreground hover:border-primary hover:text-foreground"
-                }`}
-              >
-                {f.label[locale]}
-              </button>
-            );
-          })}
-        </div>
-
-        <div className="mt-10 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-4">
-          {filtered.map((item, idx) => (
-            <button
-              key={item.key}
-              type="button"
-              onClick={() => setActiveIdx(idx)}
-              className="group relative aspect-square overflow-hidden rounded-xl bg-card focus:outline-none focus:ring-2 focus:ring-primary"
-              aria-label={item.alt[locale]}
-            >
-              <img
-                src={item.src}
-                alt={item.alt[locale]}
-                loading="lazy"
-                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-black/0 transition-colors group-hover:bg-black/20" />
-            </button>
-          ))}
-        </div>
-
-        {filtered.length === 0 && (
+        {sections.length === 0 ? (
           <p className="mt-16 text-center text-muted-foreground">
-            {locale === "it" ? "Nessuna foto in questa categoria." : "No photos in this category."}
+            {locale === "it" ? "Nessuna foto disponibile." : "No photos available."}
           </p>
+        ) : (
+          <div className="mt-14 space-y-16">
+            {sections.map((section) => {
+              const startIdx = flatItems.findIndex((it) => it.key === section.items[0].key);
+              return (
+                <div key={section.id}>
+                  <div className="mb-6 flex items-end justify-between gap-4 border-b border-border pb-3">
+                    <h2 className="font-display text-2xl font-bold text-foreground sm:text-3xl">
+                      {section.label[locale]}
+                    </h2>
+                    <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                      {section.items.length} {locale === "it" ? "foto" : "photos"}
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-4">
+                    {section.items.map((item, i) => (
+                      <button
+                        key={item.key}
+                        type="button"
+                        onClick={() => setActiveIdx(startIdx + i)}
+                        className="group relative aspect-square overflow-hidden rounded-xl bg-card focus:outline-none focus:ring-2 focus:ring-primary"
+                        aria-label={item.alt[locale]}
+                      >
+                        <img
+                          src={item.src}
+                          alt={item.alt[locale]}
+                          loading="lazy"
+                          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        />
+                        <div className="absolute inset-0 bg-black/0 transition-colors group-hover:bg-black/20" />
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         )}
       </section>
 
@@ -178,3 +184,4 @@ function GalleryPage() {
     </SiteLayout>
   );
 }
+
