@@ -118,7 +118,13 @@ const translations: Translations = {
     "footer.quickLinks": "Link rapidi",
     "footer.contact": "Contatti",
     "footer.rights": "Tutti i diritti riservati.",
+    "footer.legal": "Legale",
+    "footer.privacy": "Privacy Policy",
+    "footer.cookies": "Cookie Policy",
+    "footer.terms": "Termini e condizioni",
+    "footer.developedBy": "Sviluppato da",
   },
+
   en: {
     // Nav
     "nav.home": "Home",
@@ -231,8 +237,14 @@ const translations: Translations = {
     "footer.quickLinks": "Quick links",
     "footer.contact": "Contact",
     "footer.rights": "All rights reserved.",
+    "footer.legal": "Legal",
+    "footer.privacy": "Privacy Policy",
+    "footer.cookies": "Cookie Policy",
+    "footer.terms": "Terms & conditions",
+    "footer.developedBy": "Developed by",
   },
 };
+
 
 type I18nContextValue = {
   locale: Locale;
