@@ -71,7 +71,7 @@ function GalleryPage() {
       alt: { it: p.alt_it, en: p.alt_en },
       categories: p.category_slugs,
     }));
-    return [...dbItems, ...staticItems];
+    return dbItems.length > 0 ? dbItems : staticItems;
   }, [dbPhotos]);
 
   const filters = useMemo(() => {
