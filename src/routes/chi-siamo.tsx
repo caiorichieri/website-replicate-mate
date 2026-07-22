@@ -67,9 +67,9 @@ function AboutPage() {
               <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-primary">
                 <Icon className="h-6 w-6" />
               </div>
-              <h3 className="mt-5 font-display text-xl font-semibold text-foreground">
+              <h2 className="mt-5 font-display text-xl font-semibold text-foreground">
                 {t(`about.values.${key}`)}
-              </h3>
+              </h2>
               <p className="mt-2 text-sm text-muted-foreground">
                 {t(`about.values.${key}Desc`)}
               </p>
