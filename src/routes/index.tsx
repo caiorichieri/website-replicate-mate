@@ -15,7 +15,13 @@ const EVENT_HIGHLIGHTS = EVENT_CATEGORIES.slice(0, 8);
 
 export const Route = createFileRoute("/")({
   component: HomePage,
+  head: () => ({
+    links: [
+      { rel: "preload", as: "image", href: heroImage, fetchPriority: "high" },
+    ],
+  }),
 });
+
 
 
 function HomePage() {
@@ -28,6 +34,9 @@ function HomePage() {
         <img
           src={heroImage}
           alt="Alla Nazionale — la nostra location per eventi"
+          width={1920}
+          height={1080}
+          fetchPriority="high"
           className="absolute inset-0 -z-20 h-full w-full object-cover"
         />
         {/* Overlay crema traslucida sopra la foto */}
@@ -71,6 +80,9 @@ function HomePage() {
           <img
             src={introImage}
             alt="La famiglia Cinelli — Alla Nazionale"
+            width={1600}
+            height={900}
+            loading="lazy"
             className="absolute inset-0 h-full w-full object-cover"
           />
           <div className="absolute inset-0 bg-side-overlay-left" />
@@ -137,6 +149,9 @@ function HomePage() {
           <img
             src={spacesImage}
             alt="Personalizziamo ogni evento nei minimi dettagli"
+            width={1600}
+            height={900}
+            loading="lazy"
             className="absolute inset-0 h-full w-full object-cover"
           />
           <div className="absolute inset-0 bg-side-overlay-right" />
