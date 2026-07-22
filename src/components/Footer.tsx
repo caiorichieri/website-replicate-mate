@@ -62,6 +62,15 @@ export function Footer() {
             <li><Link to="/privacy" className="text-muted-foreground hover:text-primary">{t("footer.privacy")}</Link></li>
             <li><Link to="/cookie-policy" className="text-muted-foreground hover:text-primary">{t("footer.cookies")}</Link></li>
             <li><Link to="/termini" className="text-muted-foreground hover:text-primary">{t("footer.terms")}</Link></li>
+            <li>
+              <button
+                type="button"
+                onClick={() => window.dispatchEvent(new Event("open-cookie-preferences"))}
+                className="text-muted-foreground hover:text-primary"
+              >
+                {t("footer.cookiePrefs")}
+              </button>
+            </li>
           </ul>
         </div>
 
