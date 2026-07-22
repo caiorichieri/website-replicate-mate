@@ -15,7 +15,13 @@ const EVENT_HIGHLIGHTS = EVENT_CATEGORIES.slice(0, 8);
 
 export const Route = createFileRoute("/")({
   component: HomePage,
+  head: () => ({
+    links: [
+      { rel: "preload", as: "image", href: heroImage, fetchPriority: "high" },
+    ],
+  }),
 });
+
 
 
 function HomePage() {
