@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Mail, MapPin, Phone, Instagram, Facebook } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import { CONTACT, emailUrl, whatsappUrl } from "@/lib/contact";
+import friulionLogo from "@/assets/friulion-logo.png.asset.json";
 
 export function Footer() {
   const { t } = useI18n();
@@ -53,6 +54,15 @@ export function Footer() {
             <li><Link to="/galleria" className="text-muted-foreground hover:text-primary">{t("nav.gallery")}</Link></li>
             <li><Link to="/contatti" className="text-muted-foreground hover:text-primary">{t("nav.contact")}</Link></li>
           </ul>
+
+          <h4 className="mt-6 font-display text-sm font-semibold uppercase tracking-wider text-foreground">
+            {t("footer.legal")}
+          </h4>
+          <ul className="mt-4 space-y-2 text-sm">
+            <li><Link to="/privacy" className="text-muted-foreground hover:text-primary">{t("footer.privacy")}</Link></li>
+            <li><Link to="/cookie-policy" className="text-muted-foreground hover:text-primary">{t("footer.cookies")}</Link></li>
+            <li><Link to="/termini" className="text-muted-foreground hover:text-primary">{t("footer.terms")}</Link></li>
+          </ul>
         </div>
 
         {/* Contact */}
@@ -90,9 +100,28 @@ export function Footer() {
       </div>
 
       <div className="border-t border-border/40">
-        <div className="container mx-auto flex flex-col items-center justify-between gap-2 px-4 py-5 text-xs text-muted-foreground md:flex-row md:px-6">
+        <div className="container mx-auto flex flex-col items-center justify-between gap-4 px-4 py-5 text-xs text-muted-foreground md:flex-row md:px-6">
           <p>© {year} Alla Nazionale. {t("footer.rights")}</p>
+          <a
+            href="https://friulion.it"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 text-muted-foreground transition-colors hover:text-foreground"
+            aria-label="Sito sviluppato da Friulion"
+          >
+            <span className="uppercase tracking-wider">{t("footer.developedBy")}</span>
+            <img
+              src={friulionLogo.url}
+              alt="Friulion"
+              className="h-6 w-auto"
+              loading="lazy"
+            />
+            <span className="hidden sm:inline">· P.IVA 03157410303</span>
+          </a>
           <p className="font-medium uppercase tracking-wider text-gold">Dal 1912</p>
+        </div>
+        <div className="container mx-auto px-4 pb-5 text-center text-[10px] text-muted-foreground sm:hidden md:px-6">
+          P.IVA 03157410303
         </div>
       </div>
     </footer>

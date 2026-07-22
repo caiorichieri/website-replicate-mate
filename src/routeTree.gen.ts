@@ -9,18 +9,31 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TerminiRouteImport } from './routes/termini'
 import { Route as SpaziRouteImport } from './routes/spazi'
+import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as GalleriaRouteImport } from './routes/galleria'
 import { Route as EventiRouteImport } from './routes/eventi'
+import { Route as CookiePolicyRouteImport } from './routes/cookie-policy'
 import { Route as ContattiRouteImport } from './routes/contatti'
 import { Route as ChiSiamoRouteImport } from './routes/chi-siamo'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 
+const TerminiRoute = TerminiRouteImport.update({
+  id: '/termini',
+  path: '/termini',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SpaziRoute = SpaziRouteImport.update({
   id: '/spazi',
   path: '/spazi',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GalleriaRoute = GalleriaRouteImport.update({
@@ -31,6 +44,11 @@ const GalleriaRoute = GalleriaRouteImport.update({
 const EventiRoute = EventiRouteImport.update({
   id: '/eventi',
   path: '/eventi',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CookiePolicyRoute = CookiePolicyRouteImport.update({
+  id: '/cookie-policy',
+  path: '/cookie-policy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContattiRoute = ContattiRouteImport.update({
@@ -65,9 +83,12 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/chi-siamo': typeof ChiSiamoRoute
   '/contatti': typeof ContattiRoute
+  '/cookie-policy': typeof CookiePolicyRoute
   '/eventi': typeof EventiRoute
   '/galleria': typeof GalleriaRoute
+  '/privacy': typeof PrivacyRoute
   '/spazi': typeof SpaziRoute
+  '/termini': typeof TerminiRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -75,9 +96,12 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/chi-siamo': typeof ChiSiamoRoute
   '/contatti': typeof ContattiRoute
+  '/cookie-policy': typeof CookiePolicyRoute
   '/eventi': typeof EventiRoute
   '/galleria': typeof GalleriaRoute
+  '/privacy': typeof PrivacyRoute
   '/spazi': typeof SpaziRoute
+  '/termini': typeof TerminiRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -86,9 +110,12 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/chi-siamo': typeof ChiSiamoRoute
   '/contatti': typeof ContattiRoute
+  '/cookie-policy': typeof CookiePolicyRoute
   '/eventi': typeof EventiRoute
   '/galleria': typeof GalleriaRoute
+  '/privacy': typeof PrivacyRoute
   '/spazi': typeof SpaziRoute
+  '/termini': typeof TerminiRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -98,9 +125,12 @@ export interface FileRouteTypes {
     | '/auth'
     | '/chi-siamo'
     | '/contatti'
+    | '/cookie-policy'
     | '/eventi'
     | '/galleria'
+    | '/privacy'
     | '/spazi'
+    | '/termini'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -108,9 +138,12 @@ export interface FileRouteTypes {
     | '/auth'
     | '/chi-siamo'
     | '/contatti'
+    | '/cookie-policy'
     | '/eventi'
     | '/galleria'
+    | '/privacy'
     | '/spazi'
+    | '/termini'
   id:
     | '__root__'
     | '/'
@@ -118,9 +151,12 @@ export interface FileRouteTypes {
     | '/auth'
     | '/chi-siamo'
     | '/contatti'
+    | '/cookie-policy'
     | '/eventi'
     | '/galleria'
+    | '/privacy'
     | '/spazi'
+    | '/termini'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -129,18 +165,35 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   ChiSiamoRoute: typeof ChiSiamoRoute
   ContattiRoute: typeof ContattiRoute
+  CookiePolicyRoute: typeof CookiePolicyRoute
   EventiRoute: typeof EventiRoute
   GalleriaRoute: typeof GalleriaRoute
+  PrivacyRoute: typeof PrivacyRoute
   SpaziRoute: typeof SpaziRoute
+  TerminiRoute: typeof TerminiRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/termini': {
+      id: '/termini'
+      path: '/termini'
+      fullPath: '/termini'
+      preLoaderRoute: typeof TerminiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/spazi': {
       id: '/spazi'
       path: '/spazi'
       fullPath: '/spazi'
       preLoaderRoute: typeof SpaziRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/galleria': {
@@ -155,6 +208,13 @@ declare module '@tanstack/react-router' {
       path: '/eventi'
       fullPath: '/eventi'
       preLoaderRoute: typeof EventiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cookie-policy': {
+      id: '/cookie-policy'
+      path: '/cookie-policy'
+      fullPath: '/cookie-policy'
+      preLoaderRoute: typeof CookiePolicyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contatti': {
@@ -201,9 +261,12 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   ChiSiamoRoute: ChiSiamoRoute,
   ContattiRoute: ContattiRoute,
+  CookiePolicyRoute: CookiePolicyRoute,
   EventiRoute: EventiRoute,
   GalleriaRoute: GalleriaRoute,
+  PrivacyRoute: PrivacyRoute,
   SpaziRoute: SpaziRoute,
+  TerminiRoute: TerminiRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
