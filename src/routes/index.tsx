@@ -34,6 +34,9 @@ function HomePage() {
         <img
           src={heroImage}
           alt="Alla Nazionale — la nostra location per eventi"
+          width={1920}
+          height={1080}
+          fetchPriority="high"
           className="absolute inset-0 -z-20 h-full w-full object-cover"
         />
         {/* Overlay crema traslucida sopra la foto */}
