@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
 import { useI18n } from "@/lib/i18n";
-import { whatsappUrl } from "@/lib/contact";
+import { whatsappUrl, CONTACT } from "@/lib/contact";
 import { EVENT_CATEGORIES } from "@/content/site";
 
 export const Route = createFileRoute("/eventi")({
@@ -19,6 +19,43 @@ export const Route = createFileRoute("/eventi")({
         property: "og:description",
         content:
           "Organizziamo eventi privati di ogni tipo: compleanni, baby shower, lauree, anniversari, feste aziendali e catering.",
+      },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Service",
+          name: "Organizzazione eventi privati e catering",
+          provider: { "@id": `${CONTACT.siteUrl}/#organization` },
+          areaServed: {
+            "@type": "Place",
+            name: CONTACT.city,
+            address: {
+              "@type": "PostalAddress",
+              addressLocality: CONTACT.city,
+              addressRegion: "UD",
+              addressCountry: CONTACT.country,
+            },
+          },
+          serviceType: "Eventi privati, catering, feste aziendali",
+          description:
+            "Organizziamo eventi privati di ogni tipo: compleanni, primo compleanno, baby shower, lauree, anniversari, feste aziendali e catering.",
+          hasOfferCatalog: {
+            "@type": "OfferCatalog",
+            name: "Tipologie di eventi",
+            itemListElement: EVENT_CATEGORIES.map((category) => ({
+              "@type": "Offer",
+              name: category.title.it,
+              description: category.desc.it,
+              itemOffered: {
+                "@type": "Service",
+                name: category.title.it,
+              },
+            })),
+          },
+        }),
       },
     ],
   }),

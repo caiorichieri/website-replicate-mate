@@ -1,5 +1,6 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import { I18nProvider } from "@/lib/i18n";
+import { CONTACT } from "@/lib/contact";
 
 import appCss from "../styles.css?url";
 
@@ -63,6 +64,43 @@ export const Route = createRootRoute({
       {
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700;9..144,800&display=swap",
+      },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Organization",
+              "@id": `${CONTACT.siteUrl}/#organization`,
+              name: CONTACT.siteName,
+              url: CONTACT.siteUrl,
+              email: CONTACT.email,
+              telephone: CONTACT.phoneDisplay,
+            },
+            {
+              "@type": "BarOrPub",
+              "@id": `${CONTACT.siteUrl}/#bar`,
+              name: CONTACT.siteName,
+              description:
+                "Bar storico Alla Nazionale, dal 1912. Organizziamo eventi privati, compleanni, baby shower, lauree, anniversari, feste aziendali e catering.",
+              url: CONTACT.siteUrl,
+              email: CONTACT.email,
+              telephone: CONTACT.phoneDisplay,
+              priceRange: "€€",
+              address: {
+                "@type": "PostalAddress",
+                addressLocality: CONTACT.city,
+                addressRegion: "UD",
+                addressCountry: CONTACT.country,
+              },
+              image:
+                "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/273c6d33-a36a-4241-bebe-e4ef50aaaac2",
+            },
+          ],
+        }),
       },
     ],
   }),
