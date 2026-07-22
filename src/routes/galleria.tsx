@@ -75,11 +75,13 @@ function GalleryPage() {
   }, [dbPhotos]);
 
   const filters = useMemo(() => {
-    const staticSlugs = new Set(GALLERY_FILTERS.map((f) => f.id));
-    const extras = dbCats
-      .filter((c) => !staticSlugs.has(c.slug))
-      .map((c) => ({ id: c.slug, label: { it: c.title_it, en: c.title_en } }));
-    return [...GALLERY_FILTERS, ...extras];
+    if (dbCats.length === 0) return GALLERY_FILTERS;
+    const all = GALLERY_FILTERS.find((f) => f.id === "all");
+    const fromDb = dbCats.map((c) => ({
+      id: c.slug,
+      label: { it: c.title_it, en: c.title_en },
+    }));
+    return all ? [all, ...fromDb] : fromDb;
   }, [dbCats]);
 
   const filtered = useMemo(() => {
