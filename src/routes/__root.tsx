@@ -31,6 +31,7 @@ export const Route = createRootRoute({
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { name: "theme-color", content: "#FFF6D6" },
+      { name: "google-site-verification", content: "_5aKXDHz7DeqdbHWyiEgMVyjhE7GLR3gC0ZnGhj8oZc" },
       { title: "Alla Nazionale — Bar storico, eventi e catering dal 1912" },
       {
         name: "description",
