@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
 import { useI18n } from "@/lib/i18n";
+import { CONTACT, SITE_OG_IMAGE } from "@/lib/contact";
 import { SPACES } from "@/content/site";
 import { photos } from "@/content/photos";
 
