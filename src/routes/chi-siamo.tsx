@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Award, Heart, Sparkles } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
 import { useI18n } from "@/lib/i18n";
+import { CONTACT, SITE_OG_IMAGE } from "@/lib/contact";
 import aboutImage from "@/assets/gallery-04-team.jpg";
 
 export const Route = createFileRoute("/chi-siamo")({
@@ -18,8 +19,13 @@ export const Route = createFileRoute("/chi-siamo")({
         property: "og:description",
         content: "Oltre 110 anni di storia, tradizione e ospitalità.",
       },
-      { property: "og:image", content: "/og-about.jpg" },
+      { property: "og:url", content: `${CONTACT.siteUrl}/chi-siamo` },
+      { property: "og:image", content: SITE_OG_IMAGE },
+      { name: "twitter:title", content: "Chi Siamo — Alla Nazionale" },
+      { name: "twitter:description", content: "Oltre 110 anni di storia, tradizione e ospitalità." },
+      { name: "twitter:image", content: SITE_OG_IMAGE },
     ],
+    links: [{ rel: "canonical", href: `${CONTACT.siteUrl}/chi-siamo` }],
   }),
   component: AboutPage,
 });

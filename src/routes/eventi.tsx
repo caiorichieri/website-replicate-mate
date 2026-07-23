@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
 import { useI18n } from "@/lib/i18n";
-import { whatsappUrl, CONTACT } from "@/lib/contact";
+import { CONTACT, SITE_OG_IMAGE, whatsappUrl } from "@/lib/contact";
 import { EVENT_CATEGORIES } from "@/content/site";
 
 export const Route = createFileRoute("/eventi")({
@@ -20,7 +20,13 @@ export const Route = createFileRoute("/eventi")({
         content:
           "Organizziamo eventi privati di ogni tipo: compleanni, baby shower, lauree, anniversari, feste aziendali e catering.",
       },
+      { property: "og:url", content: `${CONTACT.siteUrl}/eventi` },
+      { property: "og:image", content: SITE_OG_IMAGE },
+      { name: "twitter:title", content: "Eventi & Cerimonie — Alla Nazionale" },
+      { name: "twitter:description", content: "Organizziamo eventi privati di ogni tipo: compleanni, baby shower, lauree, anniversari, feste aziendali e catering." },
+      { name: "twitter:image", content: SITE_OG_IMAGE },
     ],
+    links: [{ rel: "canonical", href: `${CONTACT.siteUrl}/eventi` }],
     scripts: [
       {
         type: "application/ld+json",

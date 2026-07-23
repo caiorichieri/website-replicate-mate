@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
 import { useI18n } from "@/lib/i18n";
+import { CONTACT, SITE_OG_IMAGE } from "@/lib/contact";
 import { SPACES } from "@/content/site";
 import { photos } from "@/content/photos";
 
@@ -19,7 +20,13 @@ export const Route = createFileRoute("/spazi")({
         content:
           "Sala interna, pergolato coperto, terrazza panoramica e giardino per i tuoi eventi.",
       },
+      { property: "og:url", content: `${CONTACT.siteUrl}/spazi` },
+      { property: "og:image", content: SITE_OG_IMAGE },
+      { name: "twitter:title", content: "I nostri spazi — Alla Nazionale" },
+      { name: "twitter:description", content: "Sala interna, pergolato coperto, terrazza panoramica e giardino per i tuoi eventi." },
+      { name: "twitter:image", content: SITE_OG_IMAGE },
     ],
+    links: [{ rel: "canonical", href: `${CONTACT.siteUrl}/spazi` }],
   }),
   component: SpacesPage,
 });

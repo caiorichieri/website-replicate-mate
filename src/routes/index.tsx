@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
 import { useI18n } from "@/lib/i18n";
-import { whatsappUrl } from "@/lib/contact";
+import { CONTACT, SITE_OG_IMAGE, whatsappUrl } from "@/lib/contact";
 import { EVENT_CATEGORIES, HOME_PHOTOS } from "@/content/site";
 import { photos } from "@/content/photos";
 
@@ -16,7 +16,13 @@ const EVENT_HIGHLIGHTS = EVENT_CATEGORIES.slice(0, 8);
 export const Route = createFileRoute("/")({
   component: HomePage,
   head: () => ({
+    meta: [
+      { property: "og:url", content: `${CONTACT.siteUrl}/` },
+      { property: "og:image", content: SITE_OG_IMAGE },
+      { name: "twitter:image", content: SITE_OG_IMAGE },
+    ],
     links: [
+      { rel: "canonical", href: `${CONTACT.siteUrl}/` },
       { rel: "preload", as: "image", href: heroImage, fetchPriority: "high" },
     ],
   }),

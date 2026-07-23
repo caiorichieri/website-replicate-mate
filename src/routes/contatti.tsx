@@ -3,7 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Mail, MessageCircle, MapPin, Send } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
 import { useI18n } from "@/lib/i18n";
-import { CONTACT, emailUrl, whatsappUrl } from "@/lib/contact";
+import { CONTACT, SITE_OG_IMAGE, emailUrl, whatsappUrl } from "@/lib/contact";
 
 export const Route = createFileRoute("/contatti")({
   head: () => ({
@@ -19,8 +19,13 @@ export const Route = createFileRoute("/contatti")({
         property: "og:description",
         content: "Richiedi un preventivo gratuito per il tuo evento.",
       },
-      { property: "og:image", content: "/og-contact.jpg" },
+      { property: "og:url", content: `${CONTACT.siteUrl}/contatti` },
+      { property: "og:image", content: SITE_OG_IMAGE },
+      { name: "twitter:title", content: "Contatti — Alla Nazionale" },
+      { name: "twitter:description", content: "Richiedi un preventivo gratuito per il tuo evento." },
+      { name: "twitter:image", content: SITE_OG_IMAGE },
     ],
+    links: [{ rel: "canonical", href: `${CONTACT.siteUrl}/contatti` }],
   }),
   component: ContactPage,
 });

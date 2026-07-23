@@ -3,6 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { X } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
 import { useI18n } from "@/lib/i18n";
+import { CONTACT, SITE_OG_IMAGE } from "@/lib/contact";
 import { GALLERY, GALLERY_FILTERS } from "@/content/site";
 import { photos } from "@/content/photos";
 import { supabase } from "@/integrations/supabase/client";
@@ -18,7 +19,13 @@ export const Route = createFileRoute("/galleria")({
       },
       { property: "og:title", content: "Galleria — Alla Nazionale" },
       { property: "og:description", content: "Le foto dei nostri eventi e dei nostri spazi." },
+      { property: "og:url", content: `${CONTACT.siteUrl}/galleria` },
+      { property: "og:image", content: SITE_OG_IMAGE },
+      { name: "twitter:title", content: "Galleria — Alla Nazionale" },
+      { name: "twitter:description", content: "Le foto dei nostri eventi e dei nostri spazi." },
+      { name: "twitter:image", content: SITE_OG_IMAGE },
     ],
+    links: [{ rel: "canonical", href: `${CONTACT.siteUrl}/galleria` }],
   }),
   component: GalleryPage,
 });
