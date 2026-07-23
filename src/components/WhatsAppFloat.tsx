@@ -5,8 +5,8 @@ import { whatsappUrl } from "@/lib/contact";
 export function WhatsAppFloat() {
   const { t, locale } = useI18n();
   const message = locale === "it"
-    ? "Ciao! Vorrei informazioni per organizzare un evento ad Alla Nazionale."
-    : "Hi! I'd like more info about hosting an event at Alla Nazionale.";
+    ? "Ciao! Vorrei informazioni per organizzare un evento al Bar Alla Nazionale."
+    : "Hi! I'd like more info about hosting an event at Bar Alla Nazionale.";
 
   return (
     <a
