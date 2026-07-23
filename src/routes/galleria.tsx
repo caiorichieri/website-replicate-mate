@@ -3,6 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { X } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
 import { useI18n } from "@/lib/i18n";
+import { CONTACT, SITE_OG_IMAGE } from "@/lib/contact";
 import { GALLERY, GALLERY_FILTERS } from "@/content/site";
 import { photos } from "@/content/photos";
 import { supabase } from "@/integrations/supabase/client";
