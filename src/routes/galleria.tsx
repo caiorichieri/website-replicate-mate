@@ -178,11 +178,15 @@ function GalleryPage() {
                         aria-label={item.alt[locale]}
                       >
                         <img
-                          src={item.src}
+                          src={item.thumb}
                           alt={item.alt[locale]}
                           loading="lazy"
+                          decoding="async"
+                          width={600}
+                          height={600}
                           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                         />
+
                         <div className="absolute inset-0 bg-black/0 transition-colors group-hover:bg-black/20" />
                       </button>
                     ))}
