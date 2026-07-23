@@ -19,7 +19,13 @@ export const Route = createFileRoute("/galleria")({
       },
       { property: "og:title", content: "Galleria — Alla Nazionale" },
       { property: "og:description", content: "Le foto dei nostri eventi e dei nostri spazi." },
+      { property: "og:url", content: `${CONTACT.siteUrl}/galleria` },
+      { property: "og:image", content: SITE_OG_IMAGE },
+      { name: "twitter:title", content: "Galleria — Alla Nazionale" },
+      { name: "twitter:description", content: "Le foto dei nostri eventi e dei nostri spazi." },
+      { name: "twitter:image", content: SITE_OG_IMAGE },
     ],
+    links: [{ rel: "canonical", href: `${CONTACT.siteUrl}/galleria` }],
   }),
   component: GalleryPage,
 });
