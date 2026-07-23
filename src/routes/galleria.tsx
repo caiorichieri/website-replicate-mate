@@ -130,7 +130,7 @@ function GalleryPage() {
             {sections.map((section) => {
               const startIdx = flatItems.findIndex((it) => it.key === section.items[0].key);
               return (
-                <div key={section.id}>
+                <div key={section.id} id={section.id} className="scroll-mt-24">
                   <div className="mb-6 flex items-end justify-between gap-4 border-b border-border pb-3">
                     <h2 className="font-display text-2xl font-bold text-foreground sm:text-3xl">
                       {section.label[locale]}
