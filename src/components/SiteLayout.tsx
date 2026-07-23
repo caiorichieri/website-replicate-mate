@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useLocation } from "@tanstack/react-router";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
+import { WhatsAppFloat } from "./WhatsAppFloat";
 import { EventPopup } from "./EventPopup";
 import { CookieBanner } from "./CookieBanner";
 
@@ -27,6 +28,7 @@ export function SiteLayout({ children }: { children: React.ReactNode }) {
       <Header />
       <main className="flex-1">{children}</main>
       <Footer />
+      <WhatsAppFloat />
       <EventPopup />
       <CookieBanner />
     </div>
