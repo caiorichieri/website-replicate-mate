@@ -110,6 +110,15 @@ function GalleryPage() {
   const flatItems = useMemo(() => sections.flatMap((s) => s.items), [sections]);
   const active = activeIdx !== null ? flatItems[activeIdx] : null;
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (sections.length === 0) return;
+    const hash = window.location.hash.replace("#", "");
+    if (!hash) return;
+    const el = document.getElementById(hash);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [sections]);
+
   return (
     <SiteLayout>
       <section className="container mx-auto px-4 py-16 md:px-6 md:py-24">
@@ -130,7 +139,7 @@ function GalleryPage() {
             {sections.map((section) => {
               const startIdx = flatItems.findIndex((it) => it.key === section.items[0].key);
               return (
-                <div key={section.id}>
+                <div key={section.id} id={section.id} className="scroll-mt-24">
                   <div className="mb-6 flex items-end justify-between gap-4 border-b border-border pb-3">
                     <h2 className="font-display text-2xl font-bold text-foreground sm:text-3xl">
                       {section.label[locale]}
