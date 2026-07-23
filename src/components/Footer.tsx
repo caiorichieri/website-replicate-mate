@@ -42,7 +42,7 @@ export function Footer() {
 
           <div className="mt-5 flex flex-col gap-2">
             <span className="text-xs font-semibold uppercase tracking-wider text-foreground">
-              Contattaci ora
+              {t("footer.contactNow")}
             </span>
             <div className="flex flex-wrap gap-2">
               <a
