@@ -101,7 +101,7 @@ function EventsPage() {
             <Link
               key={id}
               to="/galleria"
-              hash={id}
+              hash={EVENT_TO_GALLERY_SLUG[id] ?? id}
               className="group flex flex-col rounded-2xl border border-border/60 bg-card p-7 transition-all hover:-translate-y-1 hover:border-primary/60 hover:shadow-xl hover:shadow-primary/10"
             >
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
