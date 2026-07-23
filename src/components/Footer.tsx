@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Mail, MapPin, Phone, Instagram, Facebook, MessageCircle } from "lucide-react";
+import { Mail, MapPin, Phone, Instagram, Facebook } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import { CONTACT, SOCIAL, emailUrl, whatsappUrl } from "@/lib/contact";
 import friulionLogo from "@/assets/friulion-logo.png.asset.json";
