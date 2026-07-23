@@ -3,7 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Mail, MessageCircle, MapPin, Send } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
 import { useI18n } from "@/lib/i18n";
-import { CONTACT, emailUrl, whatsappUrl } from "@/lib/contact";
+import { CONTACT, SITE_OG_IMAGE, emailUrl, whatsappUrl } from "@/lib/contact";
 
 export const Route = createFileRoute("/contatti")({
   head: () => ({
