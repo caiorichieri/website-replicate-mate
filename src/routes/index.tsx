@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
 import { useI18n } from "@/lib/i18n";
-import { whatsappUrl } from "@/lib/contact";
+import { CONTACT, SITE_OG_IMAGE, whatsappUrl } from "@/lib/contact";
 import { EVENT_CATEGORIES, HOME_PHOTOS } from "@/content/site";
 import { photos } from "@/content/photos";
 
