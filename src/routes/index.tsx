@@ -16,7 +16,13 @@ const EVENT_HIGHLIGHTS = EVENT_CATEGORIES.slice(0, 8);
 export const Route = createFileRoute("/")({
   component: HomePage,
   head: () => ({
+    meta: [
+      { property: "og:url", content: `${CONTACT.siteUrl}/` },
+      { property: "og:image", content: SITE_OG_IMAGE },
+      { name: "twitter:image", content: SITE_OG_IMAGE },
+    ],
     links: [
+      { rel: "canonical", href: `${CONTACT.siteUrl}/` },
       { rel: "preload", as: "image", href: heroImage, fetchPriority: "high" },
     ],
   }),
