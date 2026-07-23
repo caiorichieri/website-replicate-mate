@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Mail, MapPin, Phone, Instagram, Facebook, MessageCircle } from "lucide-react";
+import { Mail, MapPin, Phone, Instagram, Facebook } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import { CONTACT, SOCIAL, emailUrl, whatsappUrl } from "@/lib/contact";
 import friulionLogo from "@/assets/friulion-logo.png.asset.json";
@@ -40,40 +40,6 @@ export function Footer() {
             </a>
           </div>
 
-          <div className="mt-5 flex flex-col gap-2">
-            <span className="text-xs font-semibold uppercase tracking-wider text-foreground">
-              {t("footer.contactNow")}
-            </span>
-            <div className="flex flex-wrap gap-2">
-              <a
-                href={whatsappUrl()}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full bg-whatsapp px-4 py-2 text-sm font-semibold text-white shadow transition-transform hover:scale-105"
-              >
-                <MessageCircle className="h-4 w-4" />
-                WhatsApp
-              </a>
-              <a
-                href={SOCIAL.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] px-4 py-2 text-sm font-semibold text-white shadow transition-transform hover:scale-105"
-              >
-                <Instagram className="h-4 w-4" />
-                Instagram
-              </a>
-              <a
-                href={SOCIAL.facebookMessenger}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full bg-[#1877F2] px-4 py-2 text-sm font-semibold text-white shadow transition-transform hover:scale-105"
-              >
-                <Facebook className="h-4 w-4" />
-                Messenger
-              </a>
-            </div>
-          </div>
         </div>
 
         {/* Quick links */}
