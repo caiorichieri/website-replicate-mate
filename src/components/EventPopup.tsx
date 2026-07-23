@@ -66,8 +66,8 @@ export function EventPopup() {
       : whatsappUrl(
           data.link_value ||
             (locale === "it"
-              ? "Ciao! Ho visto il vostro sito e vorrei informazioni per organizzare un evento."
-              : "Hi! I saw your website and I'd like info about hosting an event."),
+              ? "Ciao! Ho visto il vostro sito e vorrei informazioni per organizzare un evento al Bar Alla Nazionale."
+              : "Hi! I saw your website and I'd like info about hosting an event at Bar Alla Nazionale."),
         );
 
   return (
