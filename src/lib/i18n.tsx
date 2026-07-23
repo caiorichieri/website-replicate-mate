@@ -238,6 +238,7 @@ const translations: Translations = {
     "footer.followUs": "Follow us",
     "footer.quickLinks": "Quick links",
     "footer.contact": "Contact",
+    "footer.contactNow": "Contact us now",
     "footer.rights": "All rights reserved.",
     "footer.legal": "Legal",
     "footer.privacy": "Privacy Policy",
