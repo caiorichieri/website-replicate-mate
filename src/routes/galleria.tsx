@@ -32,6 +32,7 @@ export const Route = createFileRoute("/galleria")({
 
 type DbPhoto = {
   id: string;
+  storage_path: string;
   url: string;
   alt_it: string;
   alt_en: string;
@@ -44,14 +45,18 @@ type DbCategory = { slug: string; title_it: string; title_en: string; sort_order
 type Item = {
   key: string;
   src: string;
+  thumb: string;
   alt: { it: string; en: string };
   categories: string[];
 };
+
+const THUMB_EXPIRES = 60 * 60 * 24 * 7; // 7 giorni
 
 function GalleryPage() {
   const { t, locale } = useI18n();
   const [activeIdx, setActiveIdx] = useState<number | null>(null);
   const [dbPhotos, setDbPhotos] = useState<DbPhoto[]>([]);
+  const [thumbs, setThumbs] = useState<Record<string, string>>({});
   const [dbCats, setDbCats] = useState<DbCategory[]>([]);
 
   useEffect(() => {
@@ -59,8 +64,20 @@ function GalleryPage() {
       supabase.from("gallery_photos").select("*").order("sort_order").order("created_at", { ascending: false }),
       supabase.from("gallery_categories").select("*").order("sort_order").order("title_it"),
     ]).then(([p, c]) => {
-      setDbPhotos((p.data ?? []) as DbPhoto[]);
+      const photos = (p.data ?? []) as DbPhoto[];
+      setDbPhotos(photos);
       setDbCats((c.data ?? []) as DbCategory[]);
+      // Genera in parallelo URL firmati ridimensionati per la griglia
+      Promise.all(
+        photos.map((ph) =>
+          supabase.storage
+            .from("gallery")
+            .createSignedUrl(ph.storage_path, THUMB_EXPIRES, {
+              transform: { width: 600, quality: 65, resize: "cover" },
+            })
+            .then((r) => [ph.id, r.data?.signedUrl ?? ph.url] as const),
+        ),
+      ).then((pairs) => setThumbs(Object.fromEntries(pairs)));
     });
   }, []);
 
@@ -68,17 +85,20 @@ function GalleryPage() {
     const staticItems: Item[] = GALLERY.map((g, idx) => ({
       key: `s-${idx}-${g.photoId}`,
       src: photos[g.photoId],
+      thumb: photos[g.photoId],
       alt: g.alt,
       categories: g.categories,
     }));
     const dbItems: Item[] = dbPhotos.map((p) => ({
       key: `db-${p.id}`,
       src: p.url,
+      thumb: thumbs[p.id] ?? p.url,
       alt: { it: p.alt_it, en: p.alt_en },
       categories: p.category_slugs,
     }));
     return dbItems.length > 0 ? dbItems : staticItems;
-  }, [dbPhotos]);
+  }, [dbPhotos, thumbs]);
+
 
   const categories = useMemo(() => {
     if (dbCats.length > 0) {
@@ -158,11 +178,15 @@ function GalleryPage() {
                         aria-label={item.alt[locale]}
                       >
                         <img
-                          src={item.src}
+                          src={item.thumb}
                           alt={item.alt[locale]}
                           loading="lazy"
+                          decoding="async"
+                          width={600}
+                          height={600}
                           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                         />
+
                         <div className="absolute inset-0 bg-black/0 transition-colors group-hover:bg-black/20" />
                       </button>
                     ))}
