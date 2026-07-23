@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { useLocation } from "@tanstack/react-router";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
-import { WhatsAppFloat } from "./WhatsAppFloat";
 import { EventPopup } from "./EventPopup";
 import { CookieBanner } from "./CookieBanner";
 
