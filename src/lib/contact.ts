@@ -13,6 +13,12 @@ export const CONTACT = {
   country: "Italia",
 };
 
+export const SOCIAL = {
+  facebook: "https://www.facebook.com/barallanazionale",
+  instagram: "https://www.instagram.com/bar.alla.nazionale/",
+  facebookMessenger: "https://m.me/barallanazionale",
+};
+
 /** Immagine social assoluta condivisa da tutte le pagine. */
 export const SITE_OG_IMAGE =
   "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/273c6d33-a36a-4241-bebe-e4ef50aaaac2";
