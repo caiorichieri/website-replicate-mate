@@ -19,27 +19,6 @@ export function Footer() {
           </p>
           <p className="mt-4 text-sm text-muted-foreground">{t("footer.tagline")}</p>
 
-          <div className="mt-5 flex flex-wrap items-center gap-3">
-            <a
-              href={SOCIAL.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram"
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-border/60 text-foreground/70 transition-colors hover:border-primary hover:text-primary"
-            >
-              <Instagram className="h-4 w-4" />
-            </a>
-            <a
-              href={SOCIAL.facebook}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Facebook"
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-border/60 text-foreground/70 transition-colors hover:border-primary hover:text-primary"
-            >
-              <Facebook className="h-4 w-4" />
-            </a>
-          </div>
-
         </div>
 
         {/* Quick links */}
