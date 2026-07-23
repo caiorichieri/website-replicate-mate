@@ -5,6 +5,18 @@ import { useI18n } from "@/lib/i18n";
 import { CONTACT, SITE_OG_IMAGE, whatsappUrl } from "@/lib/contact";
 import { EVENT_CATEGORIES } from "@/content/site";
 
+const EVENT_TO_GALLERY_SLUG: Record<string, string> = {
+  compleanni: "compleanni",
+  primo: "primo",
+  babyshower: "gender-reveal",
+  lauree: "lauree",
+  anniversari: "compleanno-in-sala",
+  aziendali: "eventi-aziendali",
+  catering: "catering",
+  djset: "feste-con-dj-set",
+  pensionamento: "compleanni",
+};
+
 export const Route = createFileRoute("/eventi")({
   head: () => ({
     meta: [
