@@ -43,9 +43,9 @@ export function Footer() {
 
         {/* Quick links */}
         <div>
-          <h4 className="font-display text-sm font-semibold uppercase tracking-wider text-foreground">
+          <h3 className="font-display text-sm font-semibold uppercase tracking-wider text-foreground">
             {t("footer.quickLinks")}
-          </h4>
+          </h3>
           <ul className="mt-4 space-y-2 text-sm">
             <li><Link to="/" className="text-muted-foreground hover:text-primary">{t("nav.home")}</Link></li>
             <li><Link to="/chi-siamo" className="text-muted-foreground hover:text-primary">{t("nav.about")}</Link></li>
@@ -55,9 +55,9 @@ export function Footer() {
             <li><Link to="/contatti" className="text-muted-foreground hover:text-primary">{t("nav.contact")}</Link></li>
           </ul>
 
-          <h4 className="mt-6 font-display text-sm font-semibold uppercase tracking-wider text-foreground">
+          <h3 className="mt-6 font-display text-sm font-semibold uppercase tracking-wider text-foreground">
             {t("footer.legal")}
-          </h4>
+          </h3>
           <ul className="mt-4 space-y-2 text-sm">
             <li><Link to="/privacy" className="text-muted-foreground hover:text-primary">{t("footer.privacy")}</Link></li>
             <li><Link to="/cookie-policy" className="text-muted-foreground hover:text-primary">{t("footer.cookies")}</Link></li>
@@ -76,9 +76,9 @@ export function Footer() {
 
         {/* Contact */}
         <div>
-          <h4 className="font-display text-sm font-semibold uppercase tracking-wider text-foreground">
+          <h3 className="font-display text-sm font-semibold uppercase tracking-wider text-foreground">
             {t("footer.contact")}
-          </h4>
+          </h3>
           <ul className="mt-4 space-y-3 text-sm">
             <li>
               <a
@@ -121,7 +121,7 @@ export function Footer() {
             <span className="uppercase tracking-wider">{t("footer.developedBy")}</span>
             <img
               src={friulionLogo.url}
-              alt="Friulion"
+              alt="Sito sviluppato da Friulion"
               className="h-6 w-auto"
               loading="lazy"
             />
