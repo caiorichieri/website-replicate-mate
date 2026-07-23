@@ -86,8 +86,10 @@ function EventsPage() {
 
         <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {EVENT_CATEGORIES.map(({ id, Icon, title, desc }) => (
-            <article
+            <Link
               key={id}
+              to="/galleria"
+              hash={id}
               className="group flex flex-col rounded-2xl border border-border/60 bg-card p-7 transition-all hover:-translate-y-1 hover:border-primary/60 hover:shadow-xl hover:shadow-primary/10"
             >
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
@@ -99,7 +101,10 @@ function EventsPage() {
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                 {desc[locale]}
               </p>
-            </article>
+              <span className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-primary opacity-0 transition-opacity group-hover:opacity-100">
+                {locale === "it" ? "Vedi le foto" : "See photos"} <ArrowRight className="h-4 w-4" />
+              </span>
+            </Link>
           ))}
         </div>
 
