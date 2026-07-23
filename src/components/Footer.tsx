@@ -106,6 +106,44 @@ export function Footer() {
               <span>{CONTACT.city}, {CONTACT.country}</span>
             </li>
           </ul>
+
+          <div className="mt-6">
+            <h3 className="font-display text-sm font-semibold uppercase tracking-wider text-foreground">
+              {t("footer.contactNow")}
+            </h3>
+            <div className="mt-4 flex flex-wrap gap-2">
+              <a
+                href={whatsappUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={t("common.whatsapp")}
+                className="inline-flex items-center gap-2 rounded-full bg-whatsapp px-4 py-2 text-sm font-semibold text-white transition-transform hover:scale-105"
+              >
+                <Phone className="h-4 w-4" />
+                WhatsApp
+              </a>
+              <a
+                href={SOCIAL.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-br from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] px-4 py-2 text-sm font-semibold text-white transition-transform hover:scale-105"
+              >
+                <Instagram className="h-4 w-4" />
+                Instagram
+              </a>
+              <a
+                href={SOCIAL.facebookMessenger}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook Messenger"
+                className="inline-flex items-center gap-2 rounded-full bg-[#0084ff] px-4 py-2 text-sm font-semibold text-white transition-transform hover:scale-105"
+              >
+                <Facebook className="h-4 w-4" />
+                Messenger
+              </a>
+            </div>
+          </div>
         </div>
       </div>
 
