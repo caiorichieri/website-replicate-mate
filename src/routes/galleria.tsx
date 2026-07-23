@@ -110,6 +110,15 @@ function GalleryPage() {
   const flatItems = useMemo(() => sections.flatMap((s) => s.items), [sections]);
   const active = activeIdx !== null ? flatItems[activeIdx] : null;
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (sections.length === 0) return;
+    const hash = window.location.hash.replace("#", "");
+    if (!hash) return;
+    const el = document.getElementById(hash);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [sections]);
+
   return (
     <SiteLayout>
       <section className="container mx-auto px-4 py-16 md:px-6 md:py-24">
