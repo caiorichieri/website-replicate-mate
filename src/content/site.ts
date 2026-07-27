@@ -141,7 +141,7 @@ export type Space = {
 export const SPACES: Space[] = [
   {
     id: "interna",
-    coverPhotoId: "salaInterna",
+    coverPhotoId: "salaInternaNuova",
     title: { it: "Sala interna", en: "Indoor hall" },
     desc: {
       it: "Sala accogliente ed elegante, perfetta per cene private, compleanni e celebrazioni in qualsiasi stagione. Atmosfera calda e riservata.",
