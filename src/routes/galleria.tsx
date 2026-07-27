@@ -163,6 +163,121 @@ function GalleryPage() {
     };
   }, [sections]);
 
+function Lightbox({
+  items,
+  activeIdx,
+  locale,
+  onClose,
+  onChange,
+}: {
+  items: Item[];
+  activeIdx: number;
+  locale: "it" | "en";
+  onClose: () => void;
+  onChange: (idx: number) => void;
+}) {
+  const active = items[activeIdx];
+  const hasPrev = activeIdx > 0;
+  const hasNext = activeIdx < items.length - 1;
+
+  const goPrev = useCallback(() => {
+    if (hasPrev) onChange(activeIdx - 1);
+  }, [hasPrev, activeIdx, onChange]);
+
+  const goNext = useCallback(() => {
+    if (hasNext) onChange(activeIdx + 1);
+  }, [hasNext, activeIdx, onChange]);
+
+  // Tastiera
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+      if (e.key === "ArrowLeft") goPrev();
+      if (e.key === "ArrowRight") goNext();
+    };
+    window.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [onClose, goPrev, goNext]);
+
+  // Swipe touch
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const onTouchStart = (e: React.TouchEvent) => setTouchStart(e.changedTouches[0].clientX);
+  const onTouchEnd = (e: React.TouchEvent) => {
+    if (touchStart === null) return;
+    const diff = touchStart - e.changedTouches[0].clientX;
+    if (diff > 50) goNext();
+    else if (diff < -50) goPrev();
+    setTouchStart(null);
+  };
+
+  if (!active) return null;
+
+  return (
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label="Galleria"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4"
+      onClick={onClose}
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
+    >
+      <button
+        type="button"
+        onClick={onClose}
+        aria-label="Close"
+        className="absolute right-3 top-3 z-10 rounded-full bg-black/40 p-2 text-white hover:bg-black/60 sm:right-4 sm:top-4"
+      >
+        <X className="h-5 w-5" />
+      </button>
+
+      <button
+        type="button"
+        onClick={(e) => {
+          e.stopPropagation();
+          goPrev();
+        }}
+        disabled={!hasPrev}
+        aria-label="Foto precedente"
+        className="absolute left-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-black/40 p-2 text-white disabled:opacity-30 hover:bg-black/60 sm:left-4"
+      >
+        <ChevronLeft className="h-6 w-6" />
+      </button>
+
+      <button
+        type="button"
+        onClick={(e) => {
+          e.stopPropagation();
+          goNext();
+        }}
+        disabled={!hasNext}
+        aria-label="Foto successiva"
+        className="absolute right-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-black/40 p-2 text-white disabled:opacity-30 hover:bg-black/60 sm:right-4"
+      >
+        <ChevronRight className="h-6 w-6" />
+      </button>
+
+      <div
+        className="flex max-h-[90vh] max-w-[95vw] flex-col items-center"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <img
+          src={active.src}
+          alt={active.alt[locale]}
+          className="max-h-[80vh] max-w-[90vw] rounded-lg object-contain shadow-2xl"
+        />
+        <p className="mt-3 text-sm font-medium text-white/90">
+          {activeIdx + 1} / {items.length}
+        </p>
+      </div>
+    </div>
+  );
+}
+
 
   return (
     <SiteLayout>
