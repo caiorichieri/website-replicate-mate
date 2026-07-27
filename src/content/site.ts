@@ -258,6 +258,6 @@ export const HOME_PHOTOS: {
   spaces: PhotoId;
 } = {
   hero: "terrazza1",
-  intro: "giardinoFesta",
+  intro: "storiaIngresso",
   spaces: "pergolato2",
 };

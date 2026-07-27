@@ -45,6 +45,7 @@ const asUrl = (a: { url: string }) => a.url;
 export const photos = {
   // Sala interna
   salaInternaNuova: asUrl(p_salaInternaNuova),
+  storiaIngresso: asUrl(p_storiaIngresso),
 
   // Terrazza / rooftop
   terrazza1: asUrl(p_terrazza1),
