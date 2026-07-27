@@ -223,28 +223,14 @@ function GalleryPage() {
         )}
       </section>
 
-      {active && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4"
-          onClick={() => setActiveIdx(null)}
-        >
-          <button
-            type="button"
-            onClick={() => setActiveIdx(null)}
-            aria-label="Close"
-            className="absolute right-4 top-4 rounded-full bg-background/30 p-2 text-foreground hover:bg-background/60"
-          >
-            <X className="h-5 w-5" />
-          </button>
-          <img
-            src={active.src}
-            alt={active.alt[locale]}
-            className="max-h-[90vh] max-w-[95vw] rounded-lg object-contain shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-          />
-        </div>
+      {active && activeIdx !== null && (
+        <Lightbox
+          items={flatItems}
+          activeIdx={activeIdx}
+          locale={locale}
+          onClose={() => setActiveIdx(null)}
+          onChange={setActiveIdx}
+        />
       )}
     </SiteLayout>
   );
