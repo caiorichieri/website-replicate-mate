@@ -193,7 +193,7 @@ function GalleryPage() {
                       {section.items.length} {locale === "it" ? "foto" : "photos"}
                     </span>
                   </div>
-                  <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-4">
+                  <div className="grid grid-cols-3 gap-2 sm:grid-cols-3 md:grid-cols-3 md:gap-4 lg:grid-cols-4">
                     {section.items.map((item, i) => (
                       <button
                         key={item.key}
