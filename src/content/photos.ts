@@ -26,6 +26,7 @@ import p_evento8 from "@/assets/photos/img-20251020-wa0060.jpg.asset.json";
 import p_evento9 from "@/assets/photos/img-20251020-wa0094.jpg.asset.json";
 import p_evento10 from "@/assets/photos/img-20251020-wa0119.jpg.asset.json";
 import p_salaInternaNuova from "@/assets/photos/sala-interna-nuova.jpg.asset.json";
+import p_storiaIngresso from "@/assets/photos/storia-ingresso.jpg.asset.json";
 
 // Fotos legadas (assets do bundler antigo) — ainda úteis para variedade
 import g01 from "@/assets/gallery-01-buffet-18anni.jpg";
@@ -44,6 +45,7 @@ const asUrl = (a: { url: string }) => a.url;
 export const photos = {
   // Sala interna
   salaInternaNuova: asUrl(p_salaInternaNuova),
+  storiaIngresso: asUrl(p_storiaIngresso),
 
   // Terrazza / rooftop
   terrazza1: asUrl(p_terrazza1),
