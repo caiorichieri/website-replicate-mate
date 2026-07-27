@@ -133,11 +133,36 @@ function GalleryPage() {
   useEffect(() => {
     if (typeof window === "undefined") return;
     if (sections.length === 0) return;
-    const hash = window.location.hash.replace("#", "");
-    if (!hash) return;
-    const el = document.getElementById(hash);
-    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+
+    let cancelled = false;
+    const scrollToHash = () => {
+      const hash = decodeURIComponent(window.location.hash.replace("#", ""));
+      if (!hash) return;
+      const el = document.getElementById(hash);
+      if (!el) return;
+      // riposiziona più volte: le immagini lazy possono spostare il layout
+      let tries = 0;
+      const tick = () => {
+        if (cancelled) return;
+        const target = document.getElementById(hash);
+        if (target) {
+          const top = target.getBoundingClientRect().top + window.scrollY - 96;
+          window.scrollTo({ top, behavior: tries === 0 ? "smooth" : "auto" });
+        }
+        tries += 1;
+        if (tries < 8) window.setTimeout(tick, 250);
+      };
+      tick();
+    };
+
+    scrollToHash();
+    window.addEventListener("hashchange", scrollToHash);
+    return () => {
+      cancelled = true;
+      window.removeEventListener("hashchange", scrollToHash);
+    };
   }, [sections]);
+
 
   return (
     <SiteLayout>
