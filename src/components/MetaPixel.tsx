@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useLocation } from "@tanstack/react-router";
 import { getCookieConsent, type CookieConsent } from "./CookieBanner";
 
@@ -52,9 +52,9 @@ export function MetaPixel() {
     return () => window.removeEventListener("cookie-consent-changed", handler);
   }, []);
 
-  const first = typeof window !== "undefined";
+  const first = useRef(true);
   useEffect(() => {
-    if (!first) return;
+    if (first.current) { first.current = false; return; }
     if (getCookieConsent()?.marketing && window.fbq) window.fbq("track", "PageView");
   }, [pathname]);
 
